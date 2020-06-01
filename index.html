@@ -1,24 +1,170 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <style>
+        * { margin: 0; padding: 0; }
+        body { background-color: rgb(42, 42, 42); }
+        nav { margin: auto; max-width: 640px; background-color: rgb(127, 127, 127); }
+        nav { border-radius: 0 0 4px 4px; }
+        .sticky { position: fixed; top: 0; left: 0; right: 0; }
+        ul { list-style: none; }
+        li { display: inline-block; padding: 12px 4px; border-radius: 4px; }
+        li:hover { background-color: rgb(170, 170, 170); }
+        a { text-decoration: none; vertical-align: middle; padding: 12px 4px; }
+        a { color: rgb(212, 212, 212); height: 100%; }
+        a.anchor { display: block; position: relative; top: -144px; visibility: hidden; }
+        div.project { margin: auto; max-width: 640px; }
+        header { font-family: 'Times New Roman', Times, serif; font-size: xx-large; color: rgb(212, 212, 212); }
+        header { padding: 16px 4px; }
+        /* Set in percents because I wanted to take full length of a parent container. */
+        img { max-width: 100%; border-radius: 8px; }
+        img.icon { max-width: 32px; border-radius: 8px; }
+        img#avatar { max-width: 32px; }
+        p { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+        p { color: rgb(212, 212, 212); }
+        footer { height: 96px; max-width: 640px; margin: auto; background-color: rgb(170, 170, 170); }
+        footer p { text-align: center; padding-top: 56px; margin-top: 48px; }
+    </style>
+    <head></head>
+    <body>
+        <nav id="menu">
+            <ul>
+                <li><a href="#cv"><img src="./images/avatar.png" id="avatar" /></a></li>
+                <li><a href="#cv">Vladislav Li CV/Resume</a></li>
+                <li><a href="#space_cruiser">Space Cruiser</a></li>
+                <li><a href="#target">Target</a></li>
+                <li><a href="#gtec">GTEC</a></li>
+                <li><a href="#online">Online</a></li>
+                <li><a href="#shaders">Shaders</a></li>
+                <li><a href="#pizza_burger">Pizza Burger</a></li>
+                <li><a href="#bicon">Bicon</a></li>
+                <li><a href="#cell_resistance">Cell Resistance</a></li>
+            </ul>
+        </nav>
+        <div class="project" >
+            <header><a class="anchor" id="space_cruiser"></a>Space Cruiser</header>
+            <img src="./images/space_cruiser.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                In this project, I was responsible for the physics and gameplay programming.
+                Playstation 4 racing game made by Red House Games team.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="target"></a>Target</header>
+            <img src="./images/target.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                The gameplay and gamepad programming was implemented by me.
+                Multiplayer Playstation 4 shooting game made by Peasants team.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="gtec"></a>GTEC</header>
+            <img src="./images/gtec.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                Vulkan-based game engine made by me.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="online"></a>Online</header>
+            <img src="./images/online.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                My contribution was enemy AI behaviour and game lifecycle.
+                Online multplayer top-down shooter made by Peasants team.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="shaders"></a>Shaders</header>
+            <img src="./images/shaders.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                Unity 2018.2.6f1 Lightweight pipeline Shader Graph Demo.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="pizza_burger"></a>Pizza Burger</header>
+            <img src="./images/dominos.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                I was responsible for gameplay, UI progoramming. Also, later, ported the project from PC to Android using cocos2d-x.
+                This little infinite-runner game was made by Peasants team. As a first step into the big world of games.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="bicon"></a>Bicon</header>
+            <img src="./images/bicon.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                Stands for BInary CONverter made by me. Powered by Python KIWI library.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="cell_resistance"></a>Cell Resistance</header>
+            <img src="./images/cell_resistance.gif" />
+            <img class="icon"; src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
+            <img class="icon"; src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <img class="icon"; src="https://connect-prd-cdn.unity.com/cdn-origin/assets/styles/i/learn/logo.74999562d424719ef57f8c9ba1c5202f.jpg" />
+            <img class="icon"; src="https://i.pinimg.com/originals/2f/e8/e4/2fe8e450937579dd129edac3668c69ac.jpg" />
+            <img class="icon"; src="https://83833.apps.zdusercontent.com/83833/assets/1556046787-942f229320bfc28d35310cf3b2986cc8/logo.png" />
+            <p>
+                I was responsible for background programming and building/testing for PS4.
+                Stylised top-down shooter for Playstation 4 made in 24 hours by Spicy-meat-ah-ball-a team.
+            </p>
+        </div>
+        <div class="project">
+            <header><a class="anchor" id="cv"></a>Vladislav Li</header>
+            <img src="./images/avatar_placholder.png" />
+            <p>
+                Graduate Games Programmer with 3 years of experience in C++/C# game engines including Unity and Unreal and tools development.
+            </p>
+        </div>
+        <footer>
+            <p>Vladislav Li. 2020.</p>
+        </footer>
+    </body>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="page1.css" rel="stylesheet" />
-    <title>Vladislav Li, Portfolio</title>
-</head>
-<body>
-    <main class="grid">
-        <div id="box-1"><iframe src="page2.html"></iframe></div>
-        <div id="box-2"><iframe src="page3.html"></iframe></div>
-        <div id="box-3"><iframe src="page4.html"></iframe></div>
-        <div id="box-4"><iframe src="page5.html"></iframe></div>
-        <div id="box-5"><iframe src="page6.html"></iframe></div>
-        <div id="box-6"><iframe src="page7.html"></iframe></div>
-        <div id="box-7"><iframe src="page8.html"></iframe></div>
-        <div id="box-8"><iframe src="page9.html"></iframe></div>
-        <div id="box-9"><iframe src="page10.html"></iframe></div>
-        <div id="box-10"><iframe src="page11.html"></iframe></div>
-    </main>
-</body>
+    <script>
+        window.onscroll = function() {myFunction()};
+        
+        var header = document.getElementById("menu");
+        var sticky = header.offsetTop;
+        
+        function myFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
+        </script>
 </html>
