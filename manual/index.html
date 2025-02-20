@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/me.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
     
     
       
@@ -478,6 +478,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#apendix-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apendix B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apendix B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-develop-the-hardcode-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -749,6 +773,30 @@
       Appendix A
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendix-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apendix B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apendix B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-develop-the-hardcode-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1354,6 +1402,37 @@ tunnels:
         proto: http
         addr: 8080
 </code></pre>
+<h2 id="apendix-b">Apendix B</h2>
+<h3 id="how-to-develop-the-hardcode-project">How to develop the hardcode project</h3>
+<pre><code>git clone git@github.com:couper64/hardcode.git
+cd hardcode
+</code></pre>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">If the <code>hardcode</code> environment <strong>doesn't</strong> exist.</label><label for="__tabbed_1_2">If the <code>hardcode</code> environment <strong>does</strong> exist.</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>conda create -yn hardcode python=3
+conda activate hardcode
+pip install -r requirements.txt</p>
+</div>
+<div class="tabbed-block">
+<p>conda activate hardcode</p>
+</div>
+</div>
+</div>
+<p>Finally, after the environment is set and Python packages are installed for the local development. To run the <code>public</code> documentation.</p>
+<pre><code>mkdocs serve -f public/mkdocs.yml
+</code></pre>
+<p>And, to run the <code>private</code> documentation.</p>
+<pre><code>mkdocs serve -f private/mkdocs.yml
+</code></pre>
+<p>From this point on, the changes should immediately update every time the changes are saved.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For completeness sake, below is the command to build the static website, but it isn't needed in our use case.</p>
+<pre><code>mkdocs build -f public/mkdocs.yml
+mkdocs build -f private/mkdocs.yml
+</code></pre>
+</div>
 
 
 
