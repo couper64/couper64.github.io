@@ -1001,7 +1001,7 @@ loadkeys uk
 <p>To preview the fonts. The <code>--color=always</code> and <code>-R</code> parameters are to preserve the colour in the output.</p>
 <pre><code>ls -lash --color=always /usr/share/kbd/consolefonts/ | less -R
 </code></pre>
-<p>Good choices for the UK version of Arch Linux are <code>ter-v32b</code>, <code>Uni2-Terminus16</code>, <code>Lat2-Terminus32x16</code>, and <code>Lat2-Terminus16</code>. The <code>ter-v20b</code> font is a smaller variant which seem to be a good fit for my monitor size.</p>
+<p>Good choices for the UK version of Arch Linux are <code>ter-v32b</code>, <code>Uni2-Terminus16</code>, <code>Lat2-Terminus32x16</code>, and <code>Lat2-Terminus16</code>. The <code>ter-v20b</code> font is a smaller variant which seem to be a good fit for my monitor size. Noteworthy, these fonts won't be available in the installed system. Perhaps, because I am missing some crucial steps that copies the fonts over to the installed OS.</p>
 <pre><code>setfont ter-v20b
 </code></pre>
 <p>Verify the boot mode. Either <code>64</code> or <code>32</code>. For me it was <code>64</code>. More details in the official guide <a href="https://wiki.archlinux.org/title/Installation_guide#Verify_the_boot_mode">here</a>.</p>
@@ -1088,7 +1088,7 @@ swapon /dev/nvme0n1p2
 <pre><code>arch-chroot /mnt
 </code></pre>
 <p>Set the time zone.</p>
-<pre><code>ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+<pre><code>ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 </code></pre>
 <p>Run hwclock(8) to generate /etc/adjtime.</p>
 <pre><code>hwclock --systohc
@@ -1115,21 +1115,53 @@ swapon /dev/nvme0n1p2
 <pre><code>useradd -mG wheel vlad
 passwd vlad
 </code></pre>
-<p>Install some custom packages for me.</p>
-<pre><code># This will install some packages to "bootstrap" methaphorically our system. Feel free to add the ones you want
-# "git git-lfs" to install the git vcs
-# "grub" the bootloader
-# "efibootmgr" needed to install grub
-# "amd-ucode" microcode updates for the cpu. If you have an intel one use "intel-ucode"
-# "neovim" my goto editor, if unfamiliar use nano
-# "networkmanager" to manage Internet connections both wired and wireless ( it also has an applet package network-manager-applet )
-# "pipewire pipewire-alsa pipewire-pulse pipewire-jack" for the new audio framework replacing pulse and jack. 
-# "wireplumber" the pipewire session manager.
-# "openssh" to use ssh and manage keys
-# "man" for manual pages
-# "sudo" to run commands as other users
-pacstrap -K /mnt git git-lfs grub efibootmgr neovim networkmanager pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber openssh man sudo openbox alacritty which
-</code></pre>
+<p>Install some custom packages. This will install some packages to methaphorically "bootstrap" our system.</p>
+<ul>
+<li><code>efibootmgr</code> needed to install grub</li>
+<li><code>grub</code> the bootloader</li>
+<li><code>amd-ucode</code> microcode updates for the cpu. If you have an intel one use "intel-ucode"</li>
+<li><code>neovim</code> my goto editor, if unfamiliar use nano</li>
+<li><code>networkmanager</code> to manage Internet connections both wired and wireless (it also has an applet package network-manager-applet)</li>
+<li><code>pipewire pipewire-alsa pipewire-pulse pipewire-jack</code> for the new audio framework replacing pulse and jack.</li>
+<li><code>wireplumber</code> the pipewire session manager.</li>
+<li><code>git git-lfs</code> to install the git vcs</li>
+<li><code>openssh</code> to use ssh and manage keys</li>
+<li><code>man</code> for manual pages</li>
+<li><code>alacritty</code> is Rust terminal emulator which supposedly uses GPU acceleration.</li>
+<li><code>xorg</code> to run GUI.</li>
+<li><code>openbox</code> is WM of choice, and it seems it runs better than <code>dmw</code>. According to a random post on the internet.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>base-devel<span class="w"> </span>amd-ucode<span class="w"> </span>neovim<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>openbox
+</code></pre></div>
+<p>List of dependencies that <code>base-devel</code> brings with itself. Based on this list, I updated the <code>pacstrap</code> above. I wanted to keep the basic <code>pacstrap</code> mentioned earlier as barebones as possible. To highlight that <code>base-devel</code> is optional, at least in theory, I put it in the next command of <code>pacstrap</code>.</p>
+<ul>
+<li>archlinux-keyring</li>
+<li>autoconf</li>
+<li>automake</li>
+<li>binutils</li>
+<li>bison</li>
+<li>debugedit</li>
+<li>fakeroot</li>
+<li>file</li>
+<li>findutils</li>
+<li>flex</li>
+<li>gawk</li>
+<li>gcc</li>
+<li>gettext</li>
+<li>grep</li>
+<li>groff</li>
+<li>gzip</li>
+<li>libtool</li>
+<li>m4</li>
+<li>make</li>
+<li>pacman</li>
+<li>patch</li>
+<li>pkgconf</li>
+<li>sed</li>
+<li>sudo</li>
+<li>texinfo</li>
+<li>which</li>
+</ul>
 <p>Deploy grub.</p>
 <pre><code>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 </code></pre>
@@ -1149,15 +1181,26 @@ umount -R /mnt
 # Reboot the system and unplug the installation media. I prefer to shutdown the PC, unplug the USB drive, and boot back.
 shutdown -h now
 
-# Now you'll be presented at the terminal. Log in with your user account, for me its "mjkstra".
+# Now you'll be presented at the terminal. Log in with your user account, for me its "vlad".
 
-# Enable and start the time synchronization service
+# Enable and start the time synchronisation service
 timedatectl set-ntp true
 </code></pre>
 <p>Connect to WiFi after installation.</p>
 <pre><code>nmcli device wifi list
 nmcli device wifi connect &lt;SSID&gt; password &lt;your_wifi_password&gt;
 nmcli connection show
+</code></pre>
+<p>Post installation advices are available <a href="https://wiki.archlinux.org/title/General_recommendations">here</a>.</p>
+<p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
+<pre><code>sudo nvim /etc/pacman.d/mirrorlist
+sudo nvim /etc/pacman.conf
+</code></pre>
+<p>Inside <code>/etc/pacman.conf</code> uncomment the <code>Color</code> option in Misc to make the output of pacman coloured. It makes it easier to skim through.</p>
+<pre><code>sudo pacman -S xorg-xinit xorg-fonts-misc xdg-utils
+</code></pre>
+<p>Edit <code>.bashrc</code>. Following the guide <a href="https://www.mikechambers.com/blog/post/2020-11-02-installing-openbox-on-arch-linux/">here</a>.</p>
+<pre><code>export XDG_CONFIG_HOME=$HOME/.config/
 </code></pre>
 <ol>
 <li>
