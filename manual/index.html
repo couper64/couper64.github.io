@@ -444,6 +444,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#gpu-passthrough-for-arch" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Passthrough for Arch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#software-raid" class="md-nav__link">
     <span class="md-ellipsis">
       Software RAID
@@ -737,6 +746,15 @@
   <a href="#gpu-passthrough" class="md-nav__link">
     <span class="md-ellipsis">
       GPU Passthrough
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-passthrough-for-arch" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Passthrough for Arch
     </span>
   </a>
   
@@ -1526,6 +1544,32 @@ fileserver SSH will be available at 192.168.122.104:221.
 * <a href="https://askubuntu.com/questions/1523096/single-gpu-passthrough-on-24-04-nothing-happens-when-starting-vm">The comment in this link was intriguing</a>
 * <a href="https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/home">1/2 of the guide the comment was referring to</a>
 * <a href="https://github.com/ilayna/Single-GPU-passthrough-amd-nvidia?tab=readme-ov-file">2/2 of the guide the comment was referring to</a></p>
+<h3 id="gpu-passthrough-for-arch">GPU Passthrough for Arch</h3>
+<p>A simple Bash script that will give you all the valuable IOMMU information.</p>
+<pre><code>#!/bin/bash
+
+for d in /sys/kernel/iommu_groups/*/devices/*; do
+    n=${d#*/iommu_groups/*}; n=${n%%/*}
+    printf 'IOMMU Group %s ' "$n"
+    lspci -nns "${d##*/}"
+done
+</code></pre>
+<p>The guide was mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
+<p>Modifed <code>/etc/default/grub</code> by the following to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
+<pre><code>amd_iommu=on iommu=pt pci.ids=10de:21c4,10de:1aeb
+</code></pre>
+<p>Once you've got all these options set, go ahead and commit the changes. And, reboot.</p>
+<pre><code>sudo grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+<p>After reboot, the output of <code>dmesg | grep vfio</code> indicated that the <code>vfio</code> module wasn't loaded during the boot. Logically, the selected PCI devices weren't used by <code>vfio</code> drivers. To circum nagivate this behaviour, I had to modify <code>/etc/mkinitcpio.conf</code> file.</p>
+<pre><code>MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
+</code></pre>
+<p>I saved the file, and ran the following.</p>
+<pre><code>mkinitcpio -p linux
+</code></pre>
+<p>The following command installed the required software to create a VM.</p>
+<pre><code>pacman -Sy --noconfirm qemu libvirt virt-manager edk2-ovmf dnsmasq dmidecode
+</code></pre>
 <h3 id="software-raid">Software RAID</h3>
 <p>From the internet search, the suggested tool is <code>mdadm</code>.</p>
 <p>To install <code>mdadm</code>, run the following command in terminal.</p>
