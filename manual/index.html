@@ -548,6 +548,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#how-to-install-st-dmenu-and-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install st, dmenu, and dwm on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-add-gaps-to-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to add gaps to dwm on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-install-surf-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install surf on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -887,6 +914,33 @@
   <a href="#how-to-enable-tpm-on-kvm" class="md-nav__link">
     <span class="md-ellipsis">
       How to enable TPM on KVM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-install-st-dmenu-and-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install st, dmenu, and dwm on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-add-gaps-to-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to add gaps to dwm on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-install-surf-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install surf on Arch Linux
     </span>
   </a>
   
@@ -1806,6 +1860,24 @@ mkdocs build -f private/mkdocs.yml
 </ol>
 </li>
 </ol>
+<h3 id="how-to-install-st-dmenu-and-dwm-on-arch-linux">How to install st, dmenu, and dwm on Arch Linux</h3>
+<p>Execute the following instructions [<a href="https://davidtsadler.com/posts/arch/2020-08-17/installing-st-dmenu-dwm-in-arch-linux/">1</a>].</p>
+<pre><code>sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
+</code></pre>
+<p>There are many shortcuts to remember [<a href="https://ratfactor.com/dwm">1</a>].</p>
+<h3 id="how-to-add-gaps-to-dwm-on-arch-linux">How to add gaps to dwm on Arch Linux</h3>
+<p>Download a patch that contains changes to the dwm source code [<a href="https://dwm.suckless.org/patches/gaps/">1</a>, <a href="https://www.reddit.com/r/suckless/comments/x1uk8k/how_to_know_which_version/">2</a>, <a href="https://dwm.suckless.org/patches/vanitygaps/">3</a>]. Use the <code>patch</code> command to change the source code [<a href="https://bbs.archlinux.org/viewtopic.php?id=131480">1</a>]. Also, <code>*.rej</code> contains changes that were rejected due to conflicts. These changes must be handled manually.</p>
+<pre><code>patch &lt; dwm-cfacts-vanitygaps-6.4_combo.diff
+</code></pre>
+<h3 id="how-to-install-surf-on-arch-linux">How to install surf on Arch Linux</h3>
+<p>Install dependencies [<a href="https://bbs.archlinux.org/viewtopic.php?id=268489">1</a>, <a href="https://bbs.archlinux.org/viewtopic.php?id=271511">2</a>].</p>
+<pre><code>sudo pacman -S gcr webkit2gtk-4.1
+git clone git://git.suckless.org/surf ~/.local/src/surf
+</code></pre>
+<p>Use the following to open a webpage.</p>
+<pre><code>surf http://your-url
+</code></pre>
+<p>During operation, use <code>ctrl-g</code> to enter a new URL [<a href="https://surf.suckless.org/">1</a>].</p>
 
 
 
