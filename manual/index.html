@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/me.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
       
       
 
@@ -387,6 +387,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#customising-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customising Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -507,6 +516,33 @@
   <a href="#how-to-develop-the-hardcode-project" class="md-nav__link">
     <span class="md-ellipsis">
       How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-resize-kvm-virtual-disk-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to resize KVM virtual disk size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-default-text-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set default text editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-enable-tpm-on-kvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to enable TPM on KVM
     </span>
   </a>
   
@@ -695,6 +731,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#customising-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customising Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -815,6 +860,33 @@
   <a href="#how-to-develop-the-hardcode-project" class="md-nav__link">
     <span class="md-ellipsis">
       How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-resize-kvm-virtual-disk-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to resize KVM virtual disk size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-default-text-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set default text editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-enable-tpm-on-kvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to enable TPM on KVM
     </span>
   </a>
   
@@ -1234,6 +1306,9 @@ sudo nvim /etc/pacman.conf
   * https://davidtsadler.com/posts/arch/2020-08-17/installing-st-dmenu-dwm-in-arch-linux/</p>
 </li>
 </ol>
+<h4 id="customising-arch-linux">Customising Arch Linux</h4>
+<hr />
+<p>TBD</p>
 <h3 id="apple-operating-systems">Apple Operating Systems</h3>
 <hr />
 <p>TBD</p>
@@ -1554,7 +1629,7 @@ for d in /sys/kernel/iommu_groups/*/devices/*; do
     lspci -nns "${d##*/}"
 done
 </code></pre>
-<p>The guide was mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
+<p>The guide [<a href="https://dividebyzer0.gitlab.io/GPUpassthrough.html#what-you-need">1</a>, <a href="https://qqq.ninja/blog/post/vfio-on-arch/#pre-requisites">2</a>, <a href="https://askubuntu.com/questions/1036297/cant-start-kvm-guest-network-default-is-not-active">3</a>] was mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
 <p>Modifed <code>/etc/default/grub</code> by the following to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
 <pre><code>amd_iommu=on iommu=pt pci.ids=10de:21c4,10de:1aeb
 </code></pre>
@@ -1692,6 +1767,45 @@ pip install -r requirements.txt</p>
 mkdocs build -f private/mkdocs.yml
 </code></pre>
 </div>
+<h3 id="how-to-resize-kvm-virtual-disk-size">How to resize KVM virtual disk size</h3>
+<p>Resize the virtual disk size.</p>
+<pre><code>sudo qemu-img resize /data/kvm/&lt;vm_name&gt; +10G
+</code></pre>
+<p>Check if the virtual disk has been resized.</p>
+<pre><code>sudo qemu-img info /data/kvm/&lt;vm_name&gt;
+</code></pre>
+<p>This gives the path to the *.qcow2 file which is used as an argument to the resizing command.</p>
+<pre><code>sudo virsh domblklist &lt;vm_name&gt;
+</code></pre>
+<p>Make sure that there are no snapshots otherwise resizing won't work.</p>
+<pre><code>sudo virsh snapshot-list &lt;vm_name&gt;
+</code></pre>
+<p>Remove them using this command.</p>
+<pre><code>sudo virsh snapshot-delete &lt;vm_name&gt; &lt;snapshot_name&gt;
+</code></pre>
+<p>Instructions are based on this <a href="https://linuxiac.com/how-to-resize-extend-kvm-virtual-disk-size/">guide</a>.</p>
+<h3 id="how-to-set-default-text-editor">How to set default text editor</h3>
+<p>Either just in a TTY, shell, or <code>.bashrc</code> [<a href="https://bbs.archlinux.org/viewtopic.php?id=47921">1</a>].</p>
+<pre><code>export EDITOR=nano
+</code></pre>
+<h3 id="how-to-enable-tpm-on-kvm">How to enable TPM on KVM</h3>
+<pre><code>sudo pacman -S swtpm
+</code></pre>
+<p>Then in <code>virt-manager</code> [<a href="https://computingforgeeks.com/enable-tpm-on-kvm-and-install-windows/">1</a>, <a href="https://insights.ditatompel.com/en/tutorials/run-windows-11-tpm-and-secure-boot-on-kvm/">2</a>]:</p>
+<ol>
+<li>Allow customization before installation by checking the box. You can also configure the VM network. For this guide I have used a bridged network.</li>
+<li>On the overview windows, select add hardware.</li>
+<li>Add TPM 2.0 and make the settings as shown. Then click Finish to apply the changes.<ol>
+<li>Model: TIS</li>
+<li>Backend: Emulated device</li>
+<li>Version: 2.0</li>
+</ol>
+</li>
+<li>Just before you begin the installation, remember to change Firmware. Apply the changes and begin the installation.<ol>
+<li>Firmware: *_secboot.fd</li>
+</ol>
+</li>
+</ol>
 
 
 
