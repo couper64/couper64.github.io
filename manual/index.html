@@ -1259,7 +1259,7 @@ swapon /dev/nvme0n1p2
 <div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware
 </code></pre></div>
 <p>Install some custom packages. This will install some packages to methaphorically "bootstrap" our system. Technically, these packages aren't needed to boot an operating system but I am not that hard core yet.</p>
-<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base-devel<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>neovim<span class="w"> </span>wget<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-sans<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base-devel<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>neovim<span class="w"> </span>wget<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-sans<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome<span class="w"> </span>polkit-gnome<span class="w"> </span>xf86-video-amdgpu
 </code></pre></div>
 <ul>
 <li><code>efibootmgr</code> needed to install grub</li>
@@ -1274,6 +1274,8 @@ swapon /dev/nvme0n1p2
 <li><code>man</code> for manual pages</li>
 <li><code>alacritty</code> is Rust terminal emulator which supposedly uses GPU acceleration.</li>
 <li><code>xorg</code> to run GUI, e.g. <code>dwm</code>.</li>
+<li><code>polkit-gnome</code> required for elevating privileges, also, it installs the core <code>polkit</code>.</li>
+<li><code>xf86-video-amdgpu</code> required only if we use <code>amdgpu</code> driver.</li>
 </ul>
 <p>List of dependencies that <code>base-devel</code> brings with itself. Based on this list, I updated the <code>pacstrap</code> above. I wanted to keep the basic <code>pacstrap</code> mentioned earlier as barebones as possible. To highlight that <code>base-devel</code> is optional, at least in theory, I put it in the next command of <code>pacstrap</code>.</p>
 <ul>
@@ -1325,8 +1327,9 @@ swapon /dev/nvme0n1p2
 <p>Create the <code>/etc/locale.conf</code> file, and set the LANG variable accordingly:</p>
 <pre><code>LANG=en_GB.UTF-8
 </code></pre>
-<p>If you set the console keyboard layout, make the changes persistent in /etc/vconsole.conf:</p>
+<p>If you set the console keyboard layout, make the changes persistent in /etc/vconsole.conf. The <code>FONT</code> parameter depends on the <code>terminus-font</code> package and the parameter is optional but it fixed a warning that was raised when building <code>mkinitcpio</code> [<a href="https://forum.manjaro.org/t/is-it-safe-to-remove-the-consolefont-buildhook/87086/2">1</a>].</p>
 <pre><code>KEYMAP=uk
+FONT=ter-v20b
 </code></pre>
 <p>Create the /etc/hostname file:</p>
 <pre><code>bananasbravadas
@@ -1366,6 +1369,9 @@ timedatectl set-ntp true
 sudo systemctl enable bluetooth
 sudo systemctl start bluetooth
 </code></pre>
+<p>Since we installed <em>polkit</em> and the agent, let's add it to the <code>.xinitrc</code>. This is optional as it requires <em>polkit</em> and implies that we use WM instead of a DE.</p>
+<pre><code>exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &amp;
+</code></pre>
 <p>Connect to WiFi after installation.</p>
 <pre><code>nmcli device wifi list
 nmcli device wifi connect &lt;SSID&gt; password &lt;your_wifi_password&gt;
@@ -1375,6 +1381,13 @@ nmcli connection show
 <p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
 <pre><code>sudo nvim /etc/pacman.d/mirrorlist
 sudo nvim /etc/pacman.conf
+</code></pre>
+<p>In situations where the PC uses <code>xf86-video-amdgpu</code> then modify <code>/etc/X11/xorg.conf.d/xorg.conf</code>. Bare in mind that <code>"PCI:19:0:0"</code> is taken from the output of <code>lspci -nnk</code>, where the numbers are represented in <strong>hexadecimal</strong> format but the <code>BusID</code> is in <strong>decimal</strong> format. I didn't need to append zeros at the beginning, e.g. <code>PCI:0:19:0</code> is invalid.</p>
+<pre><code>Section "Device"
+    Identifier "iGPU"
+    Driver "amdgpu"
+    BusID "PCI:19:0:0"
+EndSection
 </code></pre>
 <ol>
 <li>
@@ -1713,21 +1726,33 @@ fileserver SSH will be available at 192.168.122.104:221.
 <span class="w">        </span>lspci<span class="w"> </span>-nns<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">d</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">done</span>
 </code></pre></div>
-<p>The guide [<a href="https://dividebyzer0.gitlab.io/GPUpassthrough.html#what-you-need">1</a>, <a href="https://qqq.ninja/blog/post/vfio-on-arch/#pre-requisites">2</a>, <a href="https://askubuntu.com/questions/1036297/cant-start-kvm-guest-network-default-is-not-active">3</a>] has mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
+<p>The guide [<a href="https://dividebyzer0.gitlab.io/GPUpassthrough.html">1</a>, <a href="https://qqq.ninja/blog/post/vfio-on-arch/">2</a>, <a href="https://askubuntu.com/questions/1036297/cant-start-kvm-guest-network-default-is-not-active">3</a>] has mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
 <p>Modifed <code>/etc/default/grub</code> by adding the following to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
-<pre><code>amd_iommu=on iommu=pt pci.ids=10de:21c4,10de:1aeb
+<pre><code>amd_iommu=on iommu=pt vfio-pci.ids=10de:21c4,10de:1aeb
 </code></pre>
 <p>Once you've got all these options set, go ahead commit the changes. And, reboot.</p>
 <pre><code>sudo grub-mkconfig -o /boot/grub/grub.cfg
 </code></pre>
 <p>After reboot, the output of <code>dmesg | grep vfio</code> indicated that the <code>vfio</code> module wasn't loaded during the boot. Logically, the selected PCI devices weren't used by <code>vfio</code> drivers. To circum nagivate this behaviour, I had to modify <code>/etc/mkinitcpio.conf</code> file.</p>
-<pre><code>MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
+<p>UPDATE: it seems like <code>vfio_virqfd</code> module is built in <code>vfio</code> [<a href="https://www.reddit.com/r/archlinux/comments/11dqiy5/vfio_virqfd_missing_in_linux621arch11/">1</a>]. Logically, I removed it from the <code>MODULES</code> list.</p>
+<pre><code>MODULES=(vfio_pci vfio vfio_iommu_type1)
 </code></pre>
 <p>I saved the file, and ran the following.</p>
-<pre><code>mkinitcpio -p linux
+<pre><code>sudo mkinitcpio -p linux
 </code></pre>
-<p>The following command installed the required software to create a VM.</p>
-<pre><code>pacman -Sy --noconfirm qemu libvirt virt-manager edk2-ovmf dnsmasq dmidecode
+<p>The following command installed the required software to create a VM. The core are <code>qemu libvirt</code>. However, I use <code>virt-manager</code> GUI for easier management. The <code>dmidecode</code> package is one of the dependencies that is needed by <code>virt-manager</code>, I think. I know that somewhere along the journey, it would try to create a network which would use <code>dnsmasq</code>. The <code>edk2-ovmf</code> package is a UEFI firmware for virtual machines based on EDK II (EFI Development Kit). The <code>swtpm</code> package is needed to bypass TMP 2.0 requirement by Windows 10/11. When prompted, I selected the third option: <em>qemu-full</em>.</p>
+<pre><code>sudo pacman --sync qemu libvirt virt-manager edk2-ovmf dnsmasq dmidecode swtpm
+</code></pre>
+<p>Start the <em>libvirt</em> daemon.</p>
+<pre><code>sudo systemctl enable --now libvirtd
+sudo systemctl enable --now virtlogd.socket
+</code></pre>
+<p>Activate the default network and make it persistent between bootings.</p>
+<pre><code>sudo virsh net-start default
+sudo virsh net-autostart default
+</code></pre>
+<p>Either use <em>polkit</em> with <em>polkit-gnome</em> or add to the <code>libvirt</code> group.</p>
+<pre><code>sudo usermod -aG libvirt $USER
 </code></pre>
 <h3 id="software-raid">Software RAID</h3>
 <p>From the internet search, the suggested tool is <code>mdadm</code>.</p>
