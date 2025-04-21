@@ -1259,7 +1259,7 @@ swapon /dev/nvme0n1p2
 <div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware
 </code></pre></div>
 <p>Install some custom packages. This will install some packages to methaphorically "bootstrap" our system. Technically, these packages aren't needed to boot an operating system but I am not that hard core yet.</p>
-<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base-devel<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>neovim<span class="w"> </span>wget
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base-devel<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>neovim<span class="w"> </span>wget<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-sans<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
 </code></pre></div>
 <ul>
 <li><code>efibootmgr</code> needed to install grub</li>
@@ -1361,6 +1361,10 @@ shutdown -h now
 
 # Enable and start the time synchronisation service
 timedatectl set-ntp true
+
+# Enable bluetooth service.
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
 </code></pre>
 <p>Connect to WiFi after installation.</p>
 <pre><code>nmcli device wifi list
@@ -1371,12 +1375,6 @@ nmcli connection show
 <p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
 <pre><code>sudo nvim /etc/pacman.d/mirrorlist
 sudo nvim /etc/pacman.conf
-</code></pre>
-<p>Inside <code>/etc/pacman.conf</code> uncomment the <code>Color</code> option in Misc to make the output of pacman coloured. It makes it easier to skim through.</p>
-<pre><code>sudo pacman -S xorg-xinit xorg-fonts-misc xdg-utils
-</code></pre>
-<p>Edit <code>.bashrc</code>. Following the guide <a href="https://www.mikechambers.com/blog/post/2020-11-02-installing-openbox-on-arch-linux/">here</a>.</p>
-<pre><code>export XDG_CONFIG_HOME=$HOME/.config/
 </code></pre>
 <ol>
 <li>
@@ -1706,20 +1704,20 @@ fileserver SSH will be available at 192.168.122.104:221.
 * <a href="https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/home">1/2 of the guide the comment was referring to</a>
 * <a href="https://github.com/ilayna/Single-GPU-passthrough-amd-nvidia?tab=readme-ov-file">2/2 of the guide the comment was referring to</a></p>
 <h3 id="gpu-passthrough-for-arch">GPU Passthrough for Arch</h3>
-<p>A simple Bash script that will give you all the valuable IOMMU information.</p>
-<pre><code>#!/bin/bash
+<p>A simple Bash script that will give you all the valuable IOMMU information, e.g. <code>10de:2882</code> or <code>10de:22be</code>. The script is available at <code>project/dotfiles/.local/bin/iommu</code> and I usually install it at <code>~/.local/bin/iommu</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1">#!/bin/bash</span>
 
-for d in /sys/kernel/iommu_groups/*/devices/*; do
-    n=${d#*/iommu_groups/*}; n=${n%%/*}
-    printf 'IOMMU Group %s ' "$n"
-    lspci -nns "${d##*/}"
-done
-</code></pre>
-<p>The guide [<a href="https://dividebyzer0.gitlab.io/GPUpassthrough.html#what-you-need">1</a>, <a href="https://qqq.ninja/blog/post/vfio-on-arch/#pre-requisites">2</a>, <a href="https://askubuntu.com/questions/1036297/cant-start-kvm-guest-network-default-is-not-active">3</a>] was mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
-<p>Modifed <code>/etc/default/grub</code> by the following to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>/sys/kernel/iommu_groups/*/devices/*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">n</span><span class="o">=</span><span class="si">${</span><span class="nv">d</span><span class="p">#*/iommu_groups/*</span><span class="si">}</span><span class="p">;</span><span class="w"> </span><span class="nv">n</span><span class="o">=</span><span class="si">${</span><span class="nv">n</span><span class="p">%%/*</span><span class="si">}</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;IOMMU Group %s &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span>
+<span class="w">        </span>lspci<span class="w"> </span>-nns<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">d</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+</code></pre></div>
+<p>The guide [<a href="https://dividebyzer0.gitlab.io/GPUpassthrough.html#what-you-need">1</a>, <a href="https://qqq.ninja/blog/post/vfio-on-arch/#pre-requisites">2</a>, <a href="https://askubuntu.com/questions/1036297/cant-start-kvm-guest-network-default-is-not-active">3</a>] has mentioned ACS kernel patch, which allows the system to split the hardware devices into separate IOMMU groups. What in turn should provide higher granularity over the devices we want to pass through. I skipped this step.</p>
+<p>Modifed <code>/etc/default/grub</code> by adding the following to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
 <pre><code>amd_iommu=on iommu=pt pci.ids=10de:21c4,10de:1aeb
 </code></pre>
-<p>Once you've got all these options set, go ahead and commit the changes. And, reboot.</p>
+<p>Once you've got all these options set, go ahead commit the changes. And, reboot.</p>
 <pre><code>sudo grub-mkconfig -o /boot/grub/grub.cfg
 </code></pre>
 <p>After reboot, the output of <code>dmesg | grep vfio</code> indicated that the <code>vfio</code> module wasn't loaded during the boot. Logically, the selected PCI devices weren't used by <code>vfio</code> drivers. To circum nagivate this behaviour, I had to modify <code>/etc/mkinitcpio.conf</code> file.</p>
@@ -1916,28 +1914,25 @@ git clone git://git.suckless.org/surf ~/.local/src/surf
 <p>During operation, use <code>ctrl-g</code> to enter a new URL [<a href="https://surf.suckless.org/">1</a>]. An interesting documentation could be found here at [<a href="https://troubleshooters.com/linux/surf.htm">1</a>] as well.</p>
 <h3 id="how-to-customise-st-dmenu-dwm-on-arch-linux">How to customise st, dmenu, dwm on Arch Linux</h3>
 <p>The <em>suckless</em> software is customised primarily through <em>patches</em> [<a href="https://dwm.suckless.org/patches/">1</a>, <a href="https://tools.suckless.org/dmenu/patches/">2</a>, <a href="https://st.suckless.org/patches/">3</a>]. These patches in turn modify the source code that is written in C. To apply a patch issue a command such as like: <code>patch &lt; path/to/patch.diff</code>. I would recommend to issue the commands from the root folder of a project.</p>
-<p>The patches for <code>dwm</code>: <a href="https://dwm.suckless.org/patches/vanitygaps/">vanitygapps</a>, <a href="https://dwm.suckless.org/patches/barpadding/">barpadding</a>, <a href="https://dwm.suckless.org/patches/bar_height/">bar height</a>.</p>
+<p>Applied the patches for <code>dwm</code> in order of appearance: <a href="https://dwm.suckless.org/patches/bar_height/">bar height</a>, <a href="https://dwm.suckless.org/patches/barpadding/">barpadding</a>, <a href="https://dwm.suckless.org/patches/vanitygaps/">vanitygapps</a>.</p>
 <p>The <code>config.h</code> file is a generated file and, in my case, was own by <code>root</code>. Therefore, it was easier to modify <code>config.def.h</code> file and remove <code>config.h</code> when rebuilding.</p>
 <p>To set custom fonts, e.g. Terminus, Tamzen, JetBrains Mono, Hack, and Source Code Pro, change the arguments from <code>"monospace:size=10"</code> to <code>"xos4 Terminus:pixelsize=14"</code> in <code>config.def.h</code>.</p>
-<pre><code>...
-static const unsigned int borderpx  = 2;  /* border pixel of windows */
-static const unsigned int gappiv    = 10; /* vert inner gap between windows */
-static const int user_bh            = 10; /* 2 is the default spacing around the bar's font */
-static const int vertpad            = 10; /* vertical padding of bar */
-static const int sidepad            = 10; /* horizontal padding of bar */
-static const char *fonts[]          = { "xos4 Terminus:pixelsize=14" };
-static const char dmenufont[]       = "xos4 Terminus:pixelsize=14";
-...
-</code></pre>
-<p>The patches for <code>dmenu</code>: <a href="https://tools.suckless.org/dmenu/patches/case-insensitive/">case-insensitive</a>, <a href="https://tools.suckless.org/dmenu/patches/center/">center</a>, <a href="https://tools.suckless.org/dmenu/patches/border/">border</a>, <a href="https://tools.suckless.org/dmenu/patches/bar_height/">bar height</a>.</p>
-<pre><code>...
-static const int user_bh   = 10; /* add an defined amount of pixels to the bar height */
-static const char *fonts[] = { "xos4 Terminus:pixelsize=14" };
-/* -l option; if nonzero, dmenu uses vertical list with given number of lines */
-static unsigned int lines  = 5;
-/* Size of the window border */
-static unsigned int border_width = 2;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">borderpx</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="cm">/* border pixel of windows */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">gappiv</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="cm">/* vert inner gap between windows */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">user_bh</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="cm">/* 2 is the default spacing around the bar&#39;s font */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vertpad</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="cm">/* vertical padding of bar */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sidepad</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="cm">/* horizontal padding of bar */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">fonts</span><span class="p">[]</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;xos4 Terminus:pixelsize=14&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">dmenufont</span><span class="p">[]</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xos4 Terminus:pixelsize=14&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>The patches for <code>dmenu</code>: <a href="https://tools.suckless.org/dmenu/patches/bar_height/">bar height</a>, <a href="https://tools.suckless.org/dmenu/patches/border/">border</a>, <a href="https://tools.suckless.org/dmenu/patches/case-insensitive/">case-insensitive</a>, <a href="https://tools.suckless.org/dmenu/patches/center/">center</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">user_bh</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="cm">/* add an defined amount of pixels to the bar height */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">fonts</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;xos4 Terminus:pixelsize=14&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="cm">/* -l option; if nonzero, dmenu uses vertical list with given number of lines */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">lines</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/* Size of the window border */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">border_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
 <p>To enable bluetooth, installed <code>bluez</code>, and <code>bluez-utils</code>. The utilities package should contain <code>bluetoothctl</code> command [<a href="https://wiki.archlinux.org/title/Bluetooth">1</a>]. Enable and start the service.</p>
 <pre><code>clear ; sudo systemctl status bluetooth
 clear ; sudo systemctl enable bluetooth
@@ -1965,51 +1960,51 @@ trust &lt;MAC&gt;
 <li>bluetooth status</li>
 <li></li>
 </ol>
-<p>A script that achieves this.</p>
-<pre><code>#!/bin/bash
+<p>A script that achieves this is available at <code>project/dotfiles/.local/bin/status</code>. I usually copy it over to <code>~/.local/bin/status</code>. An example is displayed below.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1">#!/bin/bash</span>
 
-while true; do
-    # Volume
-    VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf("%d", $2 * 100)}')
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="c1"># Volume</span>
+<span class="w">        </span><span class="nv">VOL</span><span class="o">=</span><span class="k">$(</span>wpctl<span class="w"> </span>get-volume<span class="w"> </span>@DEFAULT_AUDIO_SINK@<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf(&quot;%d&quot;, $2 * 100)}&#39;</span><span class="k">)</span>
 
-    # Time
-    TIME=$(date '+%Y/%m/%d %H:%M:%S')
+<span class="w">        </span><span class="c1"># Time</span>
+<span class="w">        </span><span class="nv">TIME</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span><span class="s1">&#39;+%Y/%m/%d %H:%M:%S&#39;</span><span class="k">)</span>
 
-    # Wi-Fi
-    WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
-    SIGNAL=$(nmcli -t -f active,ssid,signal dev wifi | grep '^yes' | cut -d: -f3)
+<span class="w">        </span><span class="c1"># Wi-Fi</span>
+<span class="w">        </span><span class="nv">WIFI</span><span class="o">=</span><span class="k">$(</span>nmcli<span class="w"> </span>-t<span class="w"> </span>-f<span class="w"> </span>active,ssid<span class="w"> </span>dev<span class="w"> </span>wifi<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;^yes&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="k">)</span>
+<span class="w">        </span><span class="nv">SIGNAL</span><span class="o">=</span><span class="k">$(</span>nmcli<span class="w"> </span>-t<span class="w"> </span>-f<span class="w"> </span>active,ssid,signal<span class="w"> </span>dev<span class="w"> </span>wifi<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;^yes&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f3<span class="k">)</span>
 
-    # Bluetooth
-    BT_INFO=$(bluetoothctl info)
-    BT_CONNECTED=$(echo "$BT_INFO" | grep "Connected:" | awk '{print $2}')
-    if [ "$BT_CONNECTED" = "yes" ]; then
-        BT_NAME=$(echo "$BT_INFO" | grep "Name:" | cut -d ' ' -f2-)
-        BT_RAW_RSSI=$(echo "$BT_INFO" | grep "RSSI:" | awk '{print $2}')
-    BT_DEC_RSSI=$(printf "%d" "$BT_RAW_RSSI")
+<span class="w">        </span><span class="c1"># Bluetooth</span>
+<span class="w">        </span><span class="nv">BT_INFO</span><span class="o">=</span><span class="k">$(</span>bluetoothctl<span class="w"> </span>info<span class="k">)</span>
+<span class="w">        </span><span class="nv">BT_CONNECTED</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_INFO</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Connected:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_CONNECTED</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;yes&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">BT_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_INFO</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Name:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span>-f2-<span class="k">)</span>
+<span class="w">            </span><span class="nv">BT_RAW_RSSI</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_INFO</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;RSSI:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="w">        </span><span class="nv">BT_DEC_RSSI</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%d&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_RAW_RSSI</span><span class="s2">&quot;</span><span class="k">)</span>
 
-    # Signal quality based on dBm.
-    if [ "$BT_DEC_RSSI" -ge -60 ]; then
-            BT_QUALITY="Excellent"
-        elif [ "$BT_DEC_RSSI" -ge -70 ]; then
-            BT_QUALITY="Good"
-        elif [ "$BT_DEC_RSSI" -ge -80 ]; then
-            BT_QUALITY="Fair"
-        else
-            BT_QUALITY="Poor"
-        fi
+<span class="w">        </span><span class="c1"># Signal quality based on dBm.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_DEC_RSSI</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span>-60<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">BT_QUALITY</span><span class="o">=</span><span class="s2">&quot;Excellent&quot;</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_DEC_RSSI</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span>-70<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">BT_QUALITY</span><span class="o">=</span><span class="s2">&quot;Good&quot;</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BT_DEC_RSSI</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span>-80<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">BT_QUALITY</span><span class="o">=</span><span class="s2">&quot;Fair&quot;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nv">BT_QUALITY</span><span class="o">=</span><span class="s2">&quot;Poor&quot;</span>
+<span class="w">            </span><span class="k">fi</span>
 
 
-        BT_STATUS=" ${BT_NAME} (${BT_DEC_RSSI} dBm, ${BT_QUALITY})"
-    else
-        BT_STATUS=" Disconnected"
-    fi
+<span class="w">            </span><span class="nv">BT_STATUS</span><span class="o">=</span><span class="s2">&quot; </span><span class="si">${</span><span class="nv">BT_NAME</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">BT_DEC_RSSI</span><span class="si">}</span><span class="s2"> dBm, </span><span class="si">${</span><span class="nv">BT_QUALITY</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nv">BT_STATUS</span><span class="o">=</span><span class="s2">&quot; Disconnected&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
 
-    # Set status bar
-    xsetroot -name " ${VOL}% |  ${WIFI:-Disconnected} (${SIGNAL:-0}%) | ${BT_STATUS} | ${TIME}"
+<span class="w">        </span><span class="c1"># Set status bar</span>
+<span class="w">        </span>xsetroot<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot; </span><span class="si">${</span><span class="nv">VOL</span><span class="si">}</span><span class="s2">% |  </span><span class="si">${</span><span class="nv">WIFI</span><span class="k">:-</span><span class="nv">Disconnected</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">SIGNAL</span><span class="k">:-</span><span class="nv">0</span><span class="si">}</span><span class="s2">%) | </span><span class="si">${</span><span class="nv">BT_STATUS</span><span class="si">}</span><span class="s2"> | </span><span class="si">${</span><span class="nv">TIME</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    sleep 1
-done
-</code></pre>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">done</span>
+</code></pre></div>
 
 
 
