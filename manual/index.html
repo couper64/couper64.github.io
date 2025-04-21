@@ -549,6 +549,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#how-to-customise-xorg-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to customise xorg on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-to-install-st-dmenu-and-dwm-on-arch-linux" class="md-nav__link">
     <span class="md-ellipsis">
       How to install st, dmenu, and dwm on Arch Linux
@@ -570,6 +579,15 @@
   <a href="#how-to-install-surf-on-arch-linux" class="md-nav__link">
     <span class="md-ellipsis">
       How to install surf on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-customise-st-dmenu-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to customise st, dmenu, dwm on Arch Linux
     </span>
   </a>
   
@@ -920,6 +938,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#how-to-customise-xorg-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to customise xorg on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-to-install-st-dmenu-and-dwm-on-arch-linux" class="md-nav__link">
     <span class="md-ellipsis">
       How to install st, dmenu, and dwm on Arch Linux
@@ -941,6 +968,15 @@
   <a href="#how-to-install-surf-on-arch-linux" class="md-nav__link">
     <span class="md-ellipsis">
       How to install surf on Arch Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-customise-st-dmenu-dwm-on-arch-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to customise st, dmenu, dwm on Arch Linux
     </span>
   </a>
   
@@ -1174,7 +1210,7 @@ exit
 <p>For me, it listed <code>/dev/nvme0n1</code>.</p>
 <pre><code>fdisk /dev/nvme0n1
 </code></pre>
-<p>Then, it is a somewhat interactive TUI, but it uses, imho, very cryptic way of operation. For instance, it uses <code>p</code> to list information about the current partitioning if any. I create <code>EFI</code>, <code>swap</code>, and <code>Linux filesystem</code>. This bit is not documented in the official guide because it use case specific, luckily, there is <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae#main-installation">this guide</a> which gives some hints.</p>
+<p>Then, it is a somewhat interactive TUI, but it uses, imho, very cryptic way of operation. For instance, it uses a single letter <code>p</code> to list information about the current partitioning if any. I would rather type in an entire command but we've got what we've got. I create <code>EFI</code>, <code>swap</code>, and <code>Linux filesystem</code>. This bit is not documented in the official guide because it use case specific, luckily, there is <a href="https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae#main-installation">this guide</a> which gives some hints.</p>
 <pre><code>g # Create GPT.
 ENTER
 n # Create new partition.
@@ -1214,57 +1250,22 @@ ENTER
 mkswap /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
 </code></pre>
-<p>Mount the file systems.</p>
+<p>Mount the file systems. I didn't pay much attention here, but the order is important. First, we mount the main file system, and, then, we mount the EFI system. Otherwise, it will overwrite itself.</p>
 <pre><code>mount /dev/nvme0n1p3 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/boot
 swapon /dev/nvme0n1p2
 </code></pre>
-<p>Install essential packages</p>
-<pre><code>pacstrap -K /mnt base linux linux-firmware
-</code></pre>
-<p>Generate an fstab file.</p>
-<pre><code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
-</code></pre>
-<p>To validate.</p>
-<pre><code>vim /mnt/etc/fstab
-</code></pre>
-<p>Change root into the new system.</p>
-<pre><code>arch-chroot /mnt
-</code></pre>
-<p>Set the time zone.</p>
-<pre><code>ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
-</code></pre>
-<p>Run hwclock(8) to generate /etc/adjtime.</p>
-<pre><code>hwclock --systohc
-</code></pre>
-<p>Install NeoVim.</p>
-<pre><code>pacman -S neovim
-</code></pre>
-<p>Edit /etc/locale.gen and uncomment en_GB.UTF-8 UTF-8 and other needed UTF-8 locales. Generate the locales by running:</p>
-<pre><code>locale-gen
-</code></pre>
-<p>Create the locale.conf(5) file, and set the LANG variable accordingly:</p>
-<pre><code>LANG=en_GB.UTF-8
-</code></pre>
-<p>If you set the console keyboard layout, make the changes persistent in /etc/vconsole.conf:</p>
-<pre><code>KEYMAP=uk
-</code></pre>
-<p>Create the /etc/hostname file:</p>
-<pre><code>bananasbravadas
-</code></pre>
-<p>Set the root password:</p>
-<pre><code>passwd
-</code></pre>
-<p>Add user.</p>
-<pre><code>useradd -mG wheel vlad
-passwd vlad
-</code></pre>
-<p>Install some custom packages. This will install some packages to methaphorically "bootstrap" our system.</p>
+<p>Install essential packages. This is the minimum to have a functional operating system. Without these packages the rest of the instructions wouldn't work.</p>
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware
+</code></pre></div>
+<p>Install some custom packages. This will install some packages to methaphorically "bootstrap" our system. Technically, these packages aren't needed to boot an operating system but I am not that hard core yet.</p>
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base-devel<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>neovim<span class="w"> </span>wget
+</code></pre></div>
 <ul>
 <li><code>efibootmgr</code> needed to install grub</li>
 <li><code>grub</code> the bootloader</li>
 <li><code>amd-ucode</code> microcode updates for the cpu. If you have an intel one use "intel-ucode"</li>
-<li><code>neovim</code> my goto editor, if unfamiliar use nano</li>
+<li><code>neovim</code> my go to editor, if unfamiliar use nano.</li>
 <li><code>networkmanager</code> to manage Internet connections both wired and wireless (it also has an applet package network-manager-applet)</li>
 <li><code>pipewire pipewire-alsa pipewire-pulse pipewire-jack</code> for the new audio framework replacing pulse and jack.</li>
 <li><code>wireplumber</code> the pipewire session manager.</li>
@@ -1272,11 +1273,8 @@ passwd vlad
 <li><code>openssh</code> to use ssh and manage keys</li>
 <li><code>man</code> for manual pages</li>
 <li><code>alacritty</code> is Rust terminal emulator which supposedly uses GPU acceleration.</li>
-<li><code>xorg</code> to run GUI.</li>
-<li><code>openbox</code> is WM of choice, and it seems it runs better than <code>dmw</code>. According to a random post on the internet.</li>
+<li><code>xorg</code> to run GUI, e.g. <code>dwm</code>.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>base-devel<span class="w"> </span>amd-ucode<span class="w"> </span>neovim<span class="w"> </span>networkmanager<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>alacritty<span class="w"> </span>xorg<span class="w"> </span>openbox
-</code></pre></div>
 <p>List of dependencies that <code>base-devel</code> brings with itself. Based on this list, I updated the <code>pacstrap</code> above. I wanted to keep the basic <code>pacstrap</code> mentioned earlier as barebones as possible. To highlight that <code>base-devel</code> is optional, at least in theory, I put it in the next command of <code>pacstrap</code>.</p>
 <ul>
 <li>archlinux-keyring</li>
@@ -1306,6 +1304,40 @@ passwd vlad
 <li>texinfo</li>
 <li>which</li>
 </ul>
+<p>Generate an fstab file.</p>
+<pre><code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre>
+<p>To validate.</p>
+<pre><code>vim /mnt/etc/fstab
+</code></pre>
+<p>Change root into the new system.</p>
+<pre><code>arch-chroot /mnt
+</code></pre>
+<p>Set the time zone.</p>
+<pre><code>ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+</code></pre>
+<p>Run hwclock(8) to generate /etc/adjtime.</p>
+<pre><code>hwclock --systohc
+</code></pre>
+<p>Edit /etc/locale.gen and uncomment en_GB.UTF-8 UTF-8 and other needed UTF-8 locales. Generate the locales by running:</p>
+<pre><code>locale-gen
+</code></pre>
+<p>Create the <code>/etc/locale.conf</code> file, and set the LANG variable accordingly:</p>
+<pre><code>LANG=en_GB.UTF-8
+</code></pre>
+<p>If you set the console keyboard layout, make the changes persistent in /etc/vconsole.conf:</p>
+<pre><code>KEYMAP=uk
+</code></pre>
+<p>Create the /etc/hostname file:</p>
+<pre><code>bananasbravadas
+</code></pre>
+<p>Set the root password:</p>
+<pre><code>passwd
+</code></pre>
+<p>Add user.</p>
+<pre><code>useradd -mG wheel vlad
+passwd vlad
+</code></pre>
 <p>Deploy grub.</p>
 <pre><code>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 </code></pre>
@@ -1860,11 +1892,15 @@ mkdocs build -f private/mkdocs.yml
 </ol>
 </li>
 </ol>
+<h3 id="how-to-customise-xorg-on-arch-linux">How to customise xorg on Arch Linux</h3>
+<p>Copy <code>.xinitrc</code> from default location [<a href="https://wiki.archlinux.org/title/Xinit">1</a>].</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>cp<span class="w"> </span>/etc/X11/xinit/xinitrc<span class="w"> </span>~/.xinitrc
+</code></pre></div>
 <h3 id="how-to-install-st-dmenu-and-dwm-on-arch-linux">How to install st, dmenu, and dwm on Arch Linux</h3>
 <p>Execute the following instructions [<a href="https://davidtsadler.com/posts/arch/2020-08-17/installing-st-dmenu-dwm-in-arch-linux/">1</a>].</p>
 <pre><code>sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
 </code></pre>
-<p>There are many shortcuts to remember [<a href="https://ratfactor.com/dwm">1</a>].</p>
+<p>There are many shortcuts to remember [<a href="https://ratfactor.com/dwm">1</a>]. Also, to avoid <code>sudo</code> in <code>sudo make install</code>, I modified <code>config.mk</code> to change the prefix to <code>~/.local</code> [<a href="https://unix.stackexchange.com/questions/20953/difference-between-make-install-and-sudo-make-install">1</a>].</p>
 <h3 id="how-to-add-gaps-to-dwm-on-arch-linux">How to add gaps to dwm on Arch Linux</h3>
 <p>Download a patch that contains changes to the dwm source code [<a href="https://dwm.suckless.org/patches/gaps/">1</a>, <a href="https://www.reddit.com/r/suckless/comments/x1uk8k/how_to_know_which_version/">2</a>, <a href="https://dwm.suckless.org/patches/vanitygaps/">3</a>]. Use the <code>patch</code> command to change the source code [<a href="https://bbs.archlinux.org/viewtopic.php?id=131480">1</a>]. Also, <code>*.rej</code> contains changes that were rejected due to conflicts. These changes must be handled manually.</p>
 <pre><code>patch &lt; dwm-cfacts-vanitygaps-6.4_combo.diff
@@ -1877,7 +1913,103 @@ git clone git://git.suckless.org/surf ~/.local/src/surf
 <p>Use the following to open a webpage.</p>
 <pre><code>surf http://your-url
 </code></pre>
-<p>During operation, use <code>ctrl-g</code> to enter a new URL [<a href="https://surf.suckless.org/">1</a>].</p>
+<p>During operation, use <code>ctrl-g</code> to enter a new URL [<a href="https://surf.suckless.org/">1</a>]. An interesting documentation could be found here at [<a href="https://troubleshooters.com/linux/surf.htm">1</a>] as well.</p>
+<h3 id="how-to-customise-st-dmenu-dwm-on-arch-linux">How to customise st, dmenu, dwm on Arch Linux</h3>
+<p>The <em>suckless</em> software is customised primarily through <em>patches</em> [<a href="https://dwm.suckless.org/patches/">1</a>, <a href="https://tools.suckless.org/dmenu/patches/">2</a>, <a href="https://st.suckless.org/patches/">3</a>]. These patches in turn modify the source code that is written in C. To apply a patch issue a command such as like: <code>patch &lt; path/to/patch.diff</code>. I would recommend to issue the commands from the root folder of a project.</p>
+<p>The patches for <code>dwm</code>: <a href="https://dwm.suckless.org/patches/vanitygaps/">vanitygapps</a>, <a href="https://dwm.suckless.org/patches/barpadding/">barpadding</a>, <a href="https://dwm.suckless.org/patches/bar_height/">bar height</a>.</p>
+<p>The <code>config.h</code> file is a generated file and, in my case, was own by <code>root</code>. Therefore, it was easier to modify <code>config.def.h</code> file and remove <code>config.h</code> when rebuilding.</p>
+<p>To set custom fonts, e.g. Terminus, Tamzen, JetBrains Mono, Hack, and Source Code Pro, change the arguments from <code>"monospace:size=10"</code> to <code>"xos4 Terminus:pixelsize=14"</code> in <code>config.def.h</code>.</p>
+<pre><code>...
+static const unsigned int borderpx  = 2;  /* border pixel of windows */
+static const unsigned int gappiv    = 10; /* vert inner gap between windows */
+static const int user_bh            = 10; /* 2 is the default spacing around the bar's font */
+static const int vertpad            = 10; /* vertical padding of bar */
+static const int sidepad            = 10; /* horizontal padding of bar */
+static const char *fonts[]          = { "xos4 Terminus:pixelsize=14" };
+static const char dmenufont[]       = "xos4 Terminus:pixelsize=14";
+...
+</code></pre>
+<p>The patches for <code>dmenu</code>: <a href="https://tools.suckless.org/dmenu/patches/case-insensitive/">case-insensitive</a>, <a href="https://tools.suckless.org/dmenu/patches/center/">center</a>, <a href="https://tools.suckless.org/dmenu/patches/border/">border</a>, <a href="https://tools.suckless.org/dmenu/patches/bar_height/">bar height</a>.</p>
+<pre><code>...
+static const int user_bh   = 10; /* add an defined amount of pixels to the bar height */
+static const char *fonts[] = { "xos4 Terminus:pixelsize=14" };
+/* -l option; if nonzero, dmenu uses vertical list with given number of lines */
+static unsigned int lines  = 5;
+/* Size of the window border */
+static unsigned int border_width = 2;
+</code></pre>
+<p>To enable bluetooth, installed <code>bluez</code>, and <code>bluez-utils</code>. The utilities package should contain <code>bluetoothctl</code> command [<a href="https://wiki.archlinux.org/title/Bluetooth">1</a>]. Enable and start the service.</p>
+<pre><code>clear ; sudo systemctl status bluetooth
+clear ; sudo systemctl enable bluetooth
+clear ; sudo systemctl start bluetooth
+clear ; sudo systemctl status bluetooth
+</code></pre>
+<p>As in [<a href="https://forum.manjaro.org/t/bluetoothctl-missing-in-my-installation/88318">1</a>, <a href="https://wiki.archlinux.org/title/Bluetooth">2</a>], to find what package is required to install a command run the following.</p>
+<pre><code>clear ; sudo pacman -Fy bluetoothctl
+</code></pre>
+<p>To connect a device via <code>bluetoothctl</code>.</p>
+<pre><code>bluetoothctl
+power on
+agent on
+scan on
+pair &lt;MAC&gt;
+connect &lt;MAC&gt;
+trust &lt;MAC&gt;
+</code></pre>
+<p>The most up-to-date approach to manage audio seems to be <code>pipewire</code> but it comes with its own quirks like <code>rtkit</code> warnings [<a href="https://github.com/NixOS/nixpkgs/issues/382076">1</a>].</p>
+<p>Things I need in status bar:</p>
+<ol>
+<li>time &amp; date</li>
+<li>volume level</li>
+<li>wifi status</li>
+<li>bluetooth status</li>
+<li></li>
+</ol>
+<p>A script that achieves this.</p>
+<pre><code>#!/bin/bash
+
+while true; do
+    # Volume
+    VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf("%d", $2 * 100)}')
+
+    # Time
+    TIME=$(date '+%Y/%m/%d %H:%M:%S')
+
+    # Wi-Fi
+    WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
+    SIGNAL=$(nmcli -t -f active,ssid,signal dev wifi | grep '^yes' | cut -d: -f3)
+
+    # Bluetooth
+    BT_INFO=$(bluetoothctl info)
+    BT_CONNECTED=$(echo "$BT_INFO" | grep "Connected:" | awk '{print $2}')
+    if [ "$BT_CONNECTED" = "yes" ]; then
+        BT_NAME=$(echo "$BT_INFO" | grep "Name:" | cut -d ' ' -f2-)
+        BT_RAW_RSSI=$(echo "$BT_INFO" | grep "RSSI:" | awk '{print $2}')
+    BT_DEC_RSSI=$(printf "%d" "$BT_RAW_RSSI")
+
+    # Signal quality based on dBm.
+    if [ "$BT_DEC_RSSI" -ge -60 ]; then
+            BT_QUALITY="Excellent"
+        elif [ "$BT_DEC_RSSI" -ge -70 ]; then
+            BT_QUALITY="Good"
+        elif [ "$BT_DEC_RSSI" -ge -80 ]; then
+            BT_QUALITY="Fair"
+        else
+            BT_QUALITY="Poor"
+        fi
+
+
+        BT_STATUS=" ${BT_NAME} (${BT_DEC_RSSI} dBm, ${BT_QUALITY})"
+    else
+        BT_STATUS=" Disconnected"
+    fi
+
+    # Set status bar
+    xsetroot -name " ${VOL}% |  ${WIFI:-Disconnected} (${SIGNAL:-0}%) | ${BT_STATUS} | ${TIME}"
+
+    sleep 1
+done
+</code></pre>
 
 
 
