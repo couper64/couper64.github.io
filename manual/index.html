@@ -535,6 +535,84 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#apendix-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apendix B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apendix B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-develop-the-hardcode-project_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-resize-kvm-virtual-disk-size_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to resize KVM virtual disk size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-set-default-text-editor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set default text editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-enable-tpm-on-kvm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to enable TPM on KVM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-install-surf-on-arch-linux_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install surf on Arch Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-install-and-use-rclone_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Install and Use rclone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix A
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -854,6 +932,84 @@
       
         <li class="md-nav__item">
   <a href="#appendix-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix A
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendix-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apendix B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apendix B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-develop-the-hardcode-project_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to develop the hardcode project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-resize-kvm-virtual-disk-size_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to resize KVM virtual disk size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-set-default-text-editor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set default text editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-enable-tpm-on-kvm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to enable TPM on KVM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-install-surf-on-arch-linux_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to install surf on Arch Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-install-and-use-rclone_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Install and Use rclone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a_1" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix A
     </span>
@@ -1365,8 +1521,12 @@ mysql-password: password
 </ul>
 <h2 id="virtualisation">Virtualisation</h2>
 <p>When working with VirtualBox, to enable bridge network, it is a simple matter of changing networking adapter in the settings of the progam to bridge adapter with the real ethernet adapter selected below. However, VirtualBox doesn't let us do hardware passthrough or, at least, I didn't find a definite answer to this on the internet. Otherwise, VirtualBox is a very useful piece of software that I use from time to time to experiment with various OS and new software.</p>
-<p>Moving to QEMU/KVM, to allow virtual machines to connect to outside world the host's network should be reconfigured. To install QEMU/KVM with Virtual Manager to the following:</p>
-<pre><code>sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system bridge-utils virt-manager
+<p>Moving to QEMU/KVM, to allow virtual machines to connect to outside world the host's network should be reconfigured. The <code>swtpm</code> package is reponsible for TPM emulation. I used it to satisfy Windows 11 installation requirement. The <code>virtiofsd</code> package is needed to share folders between the host and guests. The guides at [<a href="https://www.debugpoint.com/kvm-share-folder-windows-guest/">1</a>, <a href="https://www.debugpoint.com/share-folder-virt-manager/">2</a>, <a href="https://askubuntu.com/questions/1498317/trying-to-share-a-directory-that-is-located-in-another-hard-drive-connected-to">3</a>] suggested to install WinFSP on Windows and enable Virtio FS service. However, I had compatibility issues installing <code>virtio-win-tools</code>. They were disabling my mouse. Instead, I manually applied the driver in Device Manager by right-clicking on it and selecting <em>Update driver</em> option. As for the service, I manually recreated the path to the executable and copied it from the <code>virtio-win</code> CD-ROM, e.g. <code>virtiofsd.exe</code> and <code>virtiofsd.pdb</code>. The following commands were used to create the service.</p>
+<pre><code>sc create VirtioFsSvc binpath="C:\Program Files\Virtio-Win\VioFS\virtiofs.exe" start=auto depend="WinFsp.Launcher/VirtioFsDrv" DisplayName="Virtio FS Service"
+sc start VirtioFsSvc
+</code></pre>
+<p>Experimentally, I have found that I don't have to install <code>edk2-ovmf</code> on Ubuntu because I could choose Secure Boot in <code>virt-manager</code> without it. However, on Arch Linux, it seems necessarily. To install QEMU/KVM with Virtual Manager to the following:</p>
+<pre><code>sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system bridge-utils virt-manager swtpm virtiofsd
 </code></pre>
 <p>Usually, on Ubuntu 24.04.1, user is already part of <code>libvirt</code>, so we just need to add the user to the <code>kvm</code> group.</p>
 <pre><code>sudo adduser $USER kvm
@@ -1979,6 +2139,124 @@ git clone git://git.suckless.org/surf ~/.local/src/surf
 <p>To install <code>rclone</code>, use the command <code>sudo pacman --sync rclone</code> on Arch.</p>
 <p>To mount a Google Drive remote with rclone, use the command <code>rclone mount remote_name: /path/to/mountpoint</code> replacing <code>remote_name</code> with your configured remote and <code>/path/to/mountpoint</code> with the local folder.</p>
 <h2 id="appendix-a">Appendix A</h2>
+<p>To hide the unmounted volumes, the setting is located at <code>Settings/Ubuntu Desktop/Dock/Configure Dock Behavior/Include Unmounted Volumes</code>.</p>
+<p>Command to recursively delete files.</p>
+<pre><code>find . -type f -name '*.o' -exec rm {} +
+</code></pre>
+<p>Command to recusrively clone a repository.</p>
+<pre><code>git clone --recurse-submodules git://github.com/foo/bar.git
+</code></pre>
+<p>Command to kill Ngrok process.</p>
+<pre><code>kill -9 "$(pgrep ngrok)"
+</code></pre>
+<p>Commands to run Ngrok in the background.</p>
+<pre><code>clear ; ngrok http http://localhost:8080 &gt; /dev/null &amp;
+clear ; export WEBHOOK_URL="$(curl http://localhost:4040/api/tunnels | jq ".tunnels[0].public_url")"
+clear ; echo $WEBHOOK_URL
+</code></pre>
+<p>Commands to install and setup Ngrok. First, sign up (in) and retrieve the authorisation token.</p>
+<pre><code>snap install ngrok
+ngrok config add-authtoken &lt;token&gt;
+</code></pre>
+<p>Another installation command, because when I installed <strong>ngrok</strong> through <strong>snap</strong>, it couldn't start a service, but when installed through <strong>apt</strong>, it worked.</p>
+<pre><code>curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/ngrok.gpg &amp;&amp; \
+  echo "deb [signed-by=/etc/apt/keyrings/ngrok.gpg] https://ngrok-agent.s3.amazonaws.com buster main" | \
+  sudo tee /etc/apt/sources.list.d/ngrok.list &amp;&amp; \
+  sudo apt update &amp;&amp; sudo apt install ngrok
+sudo ngrok service install --config /path/to/config.yml
+sudo ngrok service start
+</code></pre>
+<p>Although, all the messages were indicating "ok", it didn't work for me. Here is the config file.</p>
+<pre><code>authtoken: &lt;your-auth-token&gt;
+tunnels:
+    default:
+        proto: http
+        addr: 8080
+</code></pre>
+<h2 id="apendix-b">Apendix B</h2>
+<h3 id="how-to-develop-the-hardcode-project_1">How to develop the hardcode project</h3>
+<pre><code>git clone git@github.com:couper64/hardcode.git
+cd hardcode
+</code></pre>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">If the <code>hardcode</code> environment <strong>doesn't</strong> exist.</label><label for="__tabbed_2_2">If the <code>hardcode</code> environment <strong>does</strong> exist.</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>conda create -yn hardcode python=3
+conda activate hardcode
+pip install -r requirements.txt</p>
+</div>
+<div class="tabbed-block">
+<p>conda activate hardcode</p>
+</div>
+</div>
+</div>
+<p>Finally, after the environment is set and Python packages are installed for the local development. To run the <code>public</code> documentation.</p>
+<pre><code>mkdocs serve -f public/mkdocs.yml
+</code></pre>
+<p>And, to run the <code>private</code> documentation.</p>
+<pre><code>mkdocs serve -f private/mkdocs.yml
+</code></pre>
+<p>From this point on, the changes should immediately update every time the changes are saved.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For completeness sake, below is the command to build the static website, but it isn't needed in our use case.</p>
+<pre><code>mkdocs build -f public/mkdocs.yml
+mkdocs build -f private/mkdocs.yml
+</code></pre>
+</div>
+<h2 id="how-to-resize-kvm-virtual-disk-size_1">How to resize KVM virtual disk size</h2>
+<p>Resize the virtual disk size.</p>
+<pre><code>sudo qemu-img resize /data/kvm/&lt;vm_name&gt; +10G
+</code></pre>
+<p>Check if the virtual disk has been resized.</p>
+<pre><code>sudo qemu-img info /data/kvm/&lt;vm_name&gt;
+</code></pre>
+<p>This gives the path to the *.qcow2 file which is used as an argument to the resizing command.</p>
+<pre><code>sudo virsh domblklist &lt;vm_name&gt;
+</code></pre>
+<p>Make sure that there are no snapshots otherwise resizing won't work.</p>
+<pre><code>sudo virsh snapshot-list &lt;vm_name&gt;
+</code></pre>
+<p>Remove them using this command.</p>
+<pre><code>sudo virsh snapshot-delete &lt;vm_name&gt; &lt;snapshot_name&gt;
+</code></pre>
+<p>Instructions are based on this <a href="https://linuxiac.com/how-to-resize-extend-kvm-virtual-disk-size/">guide</a>.</p>
+<h2 id="how-to-set-default-text-editor_1">How to set default text editor</h2>
+<p>Either just in a TTY, shell, or <code>.bashrc</code> [<a href="https://bbs.archlinux.org/viewtopic.php?id=47921">1</a>].</p>
+<pre><code>export EDITOR=nano
+</code></pre>
+<h2 id="how-to-enable-tpm-on-kvm_1">How to enable TPM on KVM</h2>
+<pre><code>sudo pacman -S swtpm
+</code></pre>
+<p>Then in <code>virt-manager</code> [<a href="https://computingforgeeks.com/enable-tpm-on-kvm-and-install-windows/">1</a>, <a href="https://insights.ditatompel.com/en/tutorials/run-windows-11-tpm-and-secure-boot-on-kvm/">2</a>]:</p>
+<ol>
+<li>Allow customization before installation by checking the box. You can also configure the VM network. For this guide I have used a bridged network.</li>
+<li>On the overview windows, select add hardware.</li>
+<li>Add TPM 2.0 and make the settings as shown. Then click Finish to apply the changes.<ol>
+<li>Model: TIS</li>
+<li>Backend: Emulated device</li>
+<li>Version: 2.0</li>
+</ol>
+</li>
+<li>Just before you begin the installation, remember to change Firmware. Apply the changes and begin the installation.<ol>
+<li>Firmware: *_secboot.fd</li>
+</ol>
+</li>
+</ol>
+<h2 id="how-to-install-surf-on-arch-linux_1">How to install surf on Arch Linux</h2>
+<p>Install dependencies [<a href="https://bbs.archlinux.org/viewtopic.php?id=268489">1</a>, <a href="https://bbs.archlinux.org/viewtopic.php?id=271511">2</a>].</p>
+<pre><code>sudo pacman -S gcr webkit2gtk-4.1
+git clone git://git.suckless.org/surf ~/.local/src/surf
+</code></pre>
+<p>Use the following to open a webpage.</p>
+<pre><code>surf http://your-url
+</code></pre>
+<p>During operation, use <code>ctrl-g</code> to enter a new URL [<a href="https://surf.suckless.org/">1</a>]. An interesting documentation could be found here at [<a href="https://troubleshooters.com/linux/surf.htm">1</a>] as well.</p>
+<h2 id="how-to-install-and-use-rclone_1">How to Install and Use <code>rclone</code></h2>
+<p>To install <code>rclone</code>, use the command <code>sudo pacman --sync rclone</code> on Arch.</p>
+<p>To mount a Google Drive remote with rclone, use the command <code>rclone mount remote_name: /path/to/mountpoint</code> replacing <code>remote_name</code> with your configured remote and <code>/path/to/mountpoint</code> with the local folder.</p>
+<h2 id="appendix-a_1">Appendix A</h2>
 <p>To hide the unmounted volumes, the setting is located at <code>Settings/Ubuntu Desktop/Dock/Configure Dock Behavior/Include Unmounted Volumes</code>.</p>
 <p>Command to recursively delete files.</p>
 <pre><code>find . -type f -name '*.o' -exec rm {} +
