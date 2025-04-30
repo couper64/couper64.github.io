@@ -527,6 +527,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-to-use-timeshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use Timeshift
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-clean-wipe-a-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Clean Wipe a Drive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix-a" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix A
@@ -931,6 +949,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-to-use-timeshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use Timeshift
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-clean-wipe-a-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Clean Wipe a Drive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix-a" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix A
@@ -1138,9 +1174,10 @@ swapon<span class="w"> </span>/dev/nvme0n1p2
 </code></pre></div>
 <p>Install the essential packages: <code>base</code>, <code>linux</code>, and <code>linux-firmware</code>. These form the minimum needed to have a functional operating system.</p>
 <p>The <code>efibootmgr</code> and <code>grub</code> packages are required to pass control from the UEFI firmware to the Linux kernel. There are other bootloaders available, but I am most familiar with these. Without these packages, the rest of the installation would not work.</p>
-<p>It is possible to install <code>amd-ucode</code> after booting into Arch Linux, but it is best to install it during setup so that it can be loaded early through the bootloader for full effect. If you are using an Intel CPU, use <code>intel-ucode</code> instead.</p>
+<p>It is possible to install <code>amd-ucode</code> after booting into Arch Linux, but it is best to install it during setup so that it can be loaded early through the bootloader for full effect. If you are using an Intel CPU, use <code>intel-ucode</code> instead. If you are in a VM then the microcode packages should be omitted.</p>
 <p>The <code>networkmanager</code> package is needed to connect to the internet after the installation, in order to complete the post-installation setup. For most users, <em>NetworkManager</em> is the better choice due to its ease of use, GUI support, and good compatibility with desktop environments. Although, <em>iwd</em> is lighter and faster, but it is better suited for minimal or embedded setups.</p>
-<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>amd-ucode<span class="w"> </span>networkmanager
+<p>The <code>neovim</code> package is needed to provide a text editing tool. For instance, to edit <code>/etc/locale.gen</code> file later on. And, it so happened, my text editor of choice is <code>neovim</code>.</p>
+<div class="highlight"><pre><span></span><code>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>networkmanager<span class="w"> </span>neovim<span class="w"> </span>amd-ucode
 </code></pre></div>
 <p>Generate an <code>fstab</code> file.</p>
 <div class="highlight"><pre><span></span><code>genfstab<span class="w"> </span>-U<span class="w"> </span>/mnt<span class="w"> </span>&gt;&gt;<span class="w"> </span>/mnt/etc/fstab
@@ -1209,17 +1246,28 @@ nmcli<span class="w"> </span>connection<span class="w"> </span>show
 <div class="highlight"><pre><span></span><code>timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
 </code></pre></div>
 <p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
-<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/pacman.d/mirrorlist<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-R
-cat<span class="w"> </span>/etc/pacman.conf<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-R
+<div class="highlight"><pre><span></span><code>nvim<span class="w"> </span>/etc/pacman.d/mirrorlist
+nvim<span class="w"> </span>/etc/pacman.conf
 </code></pre></div>
-<p>Update and upgrade the system.</p>
+<p>Here’s how you can set <code>EDITOR=nvim</code> system-wide on Arch Linux or similar systems using <code>/etc/environment</code>. Open <code>/etc/environment</code> with root privileges:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/environment
+</code></pre></div>
+<p>Add the line below (or modify if <code>EDITOR</code> already exists). And, save and exit. This change applies to all users at next login.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">EDITOR</span><span class="o">=</span>nvim
+</code></pre></div>
+<p>Setup <em>sudo</em> priviliges for the <em>wheel</em> group by uncommenting the <code>%wheel ALL=(ALL:ALL) ALL</code> line.</p>
+<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-
+visudo
+</code></pre></div>
+<p>Update and upgrade the system. No <code>sudo</code> is installed yet.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu
 </code></pre></div>
-<p>To proceed further, it is paramount to install custom packages to help better manage hardware resources and improve overall UX. The <code>base-devel</code> package group in Arch Linux provides essential development tools like <code>make</code>, <code>gcc</code>, and <code>binutils</code>, which are required to compile software, especially when using the AUR (Arch User Repository) [<a href="#what-are-base-devel-dependencies">1</a>]. The <code>openssh</code> package is used to ssh and manage keys. The <code>neovim</code> package is my default editor of choice. The <code>man</code> package to "read the f-ing manual" [<a href="https://en.wikipedia.org/wiki/Jargon_File">1</a>]. The <code>git git-lfs</code> packages are there because of VCS [<a href="https://en.wikipedia.org/wiki/Version_control">1</a>]. To download files from the internet: <code>curl wget</code>. The <code>xorg xorg-xinit</code> packages are to enable GUI through X Systems as I consider Wayland too early to adapt. The <code>xf86-video-amdgpu</code> package is optional and it was included because the target computer iGPU is AMD-based. The <code>polkit-gnome</code> package is optional. Some software require priviliges and they are capable to self-elevate the priviliges if <code>polkit</code> is available. It comes as a dependency of the <code>polkit-gnome</code> package. The <code>alacritty</code> terminal is the default temrinal emulator of choice. The <code>firefox</code> browser is a compromise between widely available and provided the features I like. The <code>keepassxc</code> software is a password manager tool. To connect to my Google Drive I use <code>rclone</code>. To make colours warmer during late hours I use <code>redshift</code>. The <code>p7zip</code> package is used to extract archives. The <code>pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber</code> packages are needed to manage audio. The new audio framework replacing pulse and jack. And, <code>wireplumber</code> is the pipewire session manager. The <code>bluez bluez-utils</code> packages provide <code>bluetoothctl</code>. Finally, we install a bunch of fancy fonts, <code>terminus-font nerd-fonts ttf-terminus-nerd noto-sans noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-font-awesome</code>, at a cost of large storage space, i.e. aproximately 8-9 GB. On a bright side, it should cover almost any character including various emojis.</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>--sync<span class="w"> </span>base-devel<span class="w"> </span>openssh<span class="w"> </span>neovim<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>xorg<span class="w"> </span>xorg-xinit<span class="w"> </span>xf86-video-amdgpu<span class="w"> </span>polkit-gnome<span class="w"> </span>alacritty<span class="w"> </span>firefox<span class="w"> </span>keepassxc<span class="w"> </span>rclone<span class="w"> </span>redshift<span class="w"> </span>p7zip<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-sans<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
+<p>To proceed further, it is paramount to install custom packages to help better manage hardware resources and improve overall UX. The <code>sudo</code> package is important, it allows us to run as super user. The <code>base-devel</code> package group in Arch Linux provides essential development tools like <code>make</code>, <code>gcc</code>, and <code>binutils</code>, which are required to compile software, especially when using the AUR (Arch User Repository) [<a href="#what-are-base-devel-dependencies">1</a>]. The <code>openssh</code> package is used to ssh and manage keys. The <code>man</code> package to "read the f-ing manual" [<a href="https://en.wikipedia.org/wiki/Jargon_File">1</a>]. The <code>git git-lfs</code> packages are there because of VCS [<a href="https://en.wikipedia.org/wiki/Version_control">1</a>]. To download files from the internet: <code>curl wget</code>. The <code>xorg xorg-xinit</code> packages are to enable GUI through X Systems as I consider Wayland too early to adapt. The <code>xf86-video-amdgpu</code> package is optional and it was included because the target computer iGPU is AMD-based. The <code>polkit-gnome</code> package is optional. Some software require priviliges and they are capable to self-elevate the priviliges if <code>polkit</code> is available. It comes as a dependency of the <code>polkit-gnome</code> package. The <code>alacritty</code> terminal is the default temrinal emulator of choice. The <code>firefox</code> browser is a compromise between widely available and provided the features I like. The <code>keepassxc</code> software is a password manager tool. To connect to my Google Drive I use <code>rclone</code>. To make colours warmer during late hours I use <code>redshift</code>. The <code>p7zip</code> package is used to extract archives. The <code>pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber</code> packages are needed to manage audio. The new audio framework replacing pulse and jack. And, <code>wireplumber</code> is the pipewire session manager. The <code>bluez bluez-utils</code> packages provide <code>bluetoothctl</code>. Finally, we install a bunch of fancy fonts, <code>terminus-font nerd-fonts ttf-terminus-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-font-awesome</code>, at a cost of large storage space, i.e. aproximately 8-9 GB. On a bright side, it should cover almost any character including various emojis.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>--sync<span class="w"> </span>sudo<span class="w"> </span>base-devel<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>xorg<span class="w"> </span>xorg-xinit<span class="w"> </span>xf86-video-amdgpu<span class="w"> </span>polkit-gnome<span class="w"> </span>alacritty<span class="w"> </span>firefox<span class="w"> </span>keepassxc<span class="w"> </span>rclone<span class="w"> </span>redshift<span class="w"> </span>p7zip<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-fonts<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
 </code></pre></div>
 <p>As in [<a href="https://forum.manjaro.org/t/bluetoothctl-missing-in-my-installation/88318">1</a>, <a href="https://wiki.archlinux.org/title/Bluetooth">2</a>], to find what package is required to install a command run the following.</p>
-<div class="highlight"><pre><span></span><code>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span>bluetoothctl
+<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-
+clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span>bluetoothctl
 </code></pre></div>
 <p>I wanted to keep the barebones Arch Linux installation as minimal as possible, so I moved console font configuration to here as a post-installation step. Append <code>/etc/vconsole.conf</code>. The <code>FONT</code> parameter depends on the <code>terminus-font</code> package, and while optional, it resolved a warning that was raised when building <code>mkinitcpio</code> [<a href="https://forum.manjaro.org/t/is-it-safe-to-remove-the-consolefont-buildhook/87086/2">1</a>]. This font is used system-wide when booting into the system.</p>
 <div class="highlight"><pre><span></span><code>FONT=ter-v20b
@@ -1247,15 +1295,16 @@ trust &lt;MAC&gt;
 <p>Since we installed <em>polkit</em> and the agent, let's add it to the <code>.xinitrc</code>. This is optional as it requires <em>polkit</em> and implies that we use WM instead of a DE.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">exec</span><span class="w"> </span>/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1<span class="w"> </span><span class="p">&amp;</span>
 </code></pre></div>
-<p>At this point, the customised part of <code>~/.xinitrc</code> should have the following. To find <code>ATITUDE:LONGITUDE</code> for Redshift follow the instructions at [<a href="https://wiki.archlinux.org/title/Redshift">1</a>].</p>
+<p>At this point, the customised part of <code>~/.xinitrc</code> should have the following. To find <code>ATITUDE:LONGITUDE</code> for Redshift follow the instructions at [<a href="https://wiki.archlinux.org/title/Redshift">1</a>].
+51.50853, -0.12574
 <div class="highlight"><pre><span></span><code><span class="c1"># my rules</span>
 setxkbmap<span class="w"> </span>gb
 status<span class="w"> </span><span class="p">&amp;</span>
 redshift<span class="w"> </span>-P<span class="w"> </span>-O<span class="w"> </span><span class="m">2700</span><span class="w"> </span>-l<span class="w"> </span>LATITUDE:LONGITUDE<span class="w"> </span><span class="p">&amp;</span>
 <span class="nb">exec</span><span class="w"> </span>/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1<span class="w"> </span><span class="p">&amp;</span>
 <span class="nb">exec</span><span class="w"> </span>dwm
-</code></pre></div>
-<p>And, <code>~/.bashrc</code> should lhave the following.</p>
+</code></pre></div></p>
+<p>And, <code>~/.bashrc</code> should have the following.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;LC_COLLATE=C ls --color=auto --group-directories-first --sort=version&#39;</span>
 <span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;ls -lashF&#39;</span>
 
@@ -1855,6 +1904,9 @@ nvim<span class="w"> </span>config.mk
 <div class="highlight"><pre><span></span><code># XINERAMALIBS  = -lXinerama
 # XINERAMAFLAGS = -DXINERAMA
 </code></pre></div>
+<p>Edit <code>config.def.h</code> to set the <code>alacritty</code> terminal instead of <code>st</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">termcmd</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;alacritty&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div>
 <p>Compile and install.</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>clean
 make<span class="w"> </span>install
@@ -2138,6 +2190,25 @@ git clone git://git.suckless.org/surf ~/.local/src/surf
 <h2 id="how-to-install-and-use-rclone">How to Install and Use <code>rclone</code></h2>
 <p>To install <code>rclone</code>, use the command <code>sudo pacman --sync rclone</code> on Arch.</p>
 <p>To mount a Google Drive remote with rclone, use the command <code>rclone mount remote_name: /path/to/mountpoint</code> replacing <code>remote_name</code> with your configured remote and <code>/path/to/mountpoint</code> with the local folder.</p>
+<h2 id="how-to-use-timeshift">How to Use Timeshift</h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>blkid
+lsblk
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/fstab
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/dev/disk/by-uuid/your-partition-uuid<span class="w"> </span>/mnt/your-mount-point<span class="w"> </span>ext4<span class="w"> </span>defaults<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p>Or,</p>
+<div class="highlight"><pre><span></span><code>/dev/disk/by-uuid/your-partition-uuid<span class="w"> </span>/mnt/your-mount-point<span class="w"> </span>ext4<span class="w"> </span>noauto<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>timeshift<span class="w"> </span>--create
+sudo<span class="w"> </span>timeshift<span class="w"> </span>--list
+sudo<span class="w"> </span>timeshift<span class="w"> </span>--restore
+</code></pre></div>
+<p>I consider tools like Back in Time, Pike Backup, or Deja Dup not user friendly because I keep facing permissions-related errors with my home directory. Therefore, I ditch the idea of using two tools to backup my stuff and focus on Timeshift only for now.</p>
+<h2 id="how-to-clean-wipe-a-drive">How to Clean Wipe a Drive</h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/sdX<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>4M<span class="w"> </span><span class="nv">status</span><span class="o">=</span>progress
+</code></pre></div>
 <h2 id="appendix-a">Appendix A</h2>
 <p>To hide the unmounted volumes, the setting is located at <code>Settings/Ubuntu Desktop/Dock/Configure Dock Behavior/Include Unmounted Volumes</code>.</p>
 <p>Command to recursively delete files.</p>
