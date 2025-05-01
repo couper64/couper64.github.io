@@ -623,6 +623,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-to-rofi" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Rofi
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix-a_1" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix A
@@ -1045,6 +1054,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-to-rofi" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Rofi
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix-a_1" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix A
@@ -1246,8 +1264,22 @@ nmcli<span class="w"> </span>connection<span class="w"> </span>show
 <div class="highlight"><pre><span></span><code>timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
 </code></pre></div>
 <p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
-<div class="highlight"><pre><span></span><code>nvim<span class="w"> </span>/etc/pacman.d/mirrorlist
+<p><div class="highlight"><pre><span></span><code>nvim<span class="w"> </span>/etc/pacman.d/mirrorlist
 nvim<span class="w"> </span>/etc/pacman.conf
+</code></pre></div>
+Update and upgrade the system. If not root then execute <code>su -</code>.</p>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-Syu
+</code></pre></div>
+<p>To proceed further, it is paramount to install custom packages to help better manage hardware resources and improve overall UX. The <code>sudo</code> package is important, it allows us to run as super user. The <code>base-devel</code> package group in Arch Linux provides essential development tools like <code>make</code>, <code>gcc</code>, and <code>binutils</code>, which are required to compile software, especially when using the AUR (Arch User Repository) [<a href="#what-are-base-devel-dependencies">1</a>]. The <code>openssh</code> package is used to ssh and manage keys. The <code>man</code> package to "read the f-ing manual" [<a href="https://en.wikipedia.org/wiki/Jargon_File">1</a>]. The <code>git git-lfs</code> packages are there because of VCS [<a href="https://en.wikipedia.org/wiki/Version_control">1</a>]. To download files from the internet: <code>curl wget</code>. The <code>xorg xorg-xinit</code> packages are to enable GUI through X Systems as I consider Wayland too early to adapt. The <code>xf86-video-amdgpu</code> package is optional and it was included because the target computer iGPU is AMD-based. The <code>polkit-gnome</code> package is optional. Some software require priviliges and they are capable to self-elevate the priviliges if <code>polkit</code> is available. It comes as a dependency of the <code>polkit-gnome</code> package. The <code>alacritty</code> terminal is the default temrinal emulator of choice. The <code>firefox</code> browser is a compromise between widely available and provided the features I like. The <code>keepassxc</code> software is a password manager tool. To connect to my Google Drive I use <code>rclone</code>. To make colours warmer during late hours I use <code>redshift</code>. The <code>p7zip</code> package is used to extract archives. The <code>pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber</code> packages are needed to manage audio. The new audio framework replacing pulse and jack. And, <code>wireplumber</code> is the pipewire session manager. The <code>bluez bluez-utils</code> packages provide <code>bluetoothctl</code>. Finally, we install a bunch of fancy fonts, <code>terminus-font nerd-fonts ttf-terminus-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-font-awesome</code>, at a cost of large storage space, i.e. aproximately 8-9 GB. On a bright side, it should cover almost any character including various emojis. If not root then execute <code>su -</code>.</p>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>--sync<span class="w"> </span>sudo<span class="w"> </span>base-devel<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>xorg<span class="w"> </span>xorg-xinit<span class="w"> </span>xf86-video-amdgpu<span class="w"> </span>polkit-gnome<span class="w"> </span>alacritty<span class="w"> </span>firefox<span class="w"> </span>keepassxc<span class="w"> </span>rclone<span class="w"> </span>redshift<span class="w"> </span>p7zip<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-fonts<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
+</code></pre></div>
+<p>Setup <em>sudo</em> priviliges for the <em>wheel</em> group by uncommenting the <code>%wheel ALL=(ALL:ALL) ALL</code> line.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don't need to reboot the PC for the changes to take effect.</p>
+</div>
+<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-
+<span class="nv">EDITOR</span><span class="o">=</span>nvim<span class="w"> </span>visudo
 </code></pre></div>
 <p>Here’s how you can set <code>EDITOR=nvim</code> system-wide on Arch Linux or similar systems using <code>/etc/environment</code>. Open <code>/etc/environment</code> with root privileges:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/environment
@@ -1255,19 +1287,8 @@ nvim<span class="w"> </span>/etc/pacman.conf
 <p>Add the line below (or modify if <code>EDITOR</code> already exists). And, save and exit. This change applies to all users at next login.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">EDITOR</span><span class="o">=</span>nvim
 </code></pre></div>
-<p>Setup <em>sudo</em> priviliges for the <em>wheel</em> group by uncommenting the <code>%wheel ALL=(ALL:ALL) ALL</code> line.</p>
-<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-
-visudo
-</code></pre></div>
-<p>Update and upgrade the system. No <code>sudo</code> is installed yet.</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu
-</code></pre></div>
-<p>To proceed further, it is paramount to install custom packages to help better manage hardware resources and improve overall UX. The <code>sudo</code> package is important, it allows us to run as super user. The <code>base-devel</code> package group in Arch Linux provides essential development tools like <code>make</code>, <code>gcc</code>, and <code>binutils</code>, which are required to compile software, especially when using the AUR (Arch User Repository) [<a href="#what-are-base-devel-dependencies">1</a>]. The <code>openssh</code> package is used to ssh and manage keys. The <code>man</code> package to "read the f-ing manual" [<a href="https://en.wikipedia.org/wiki/Jargon_File">1</a>]. The <code>git git-lfs</code> packages are there because of VCS [<a href="https://en.wikipedia.org/wiki/Version_control">1</a>]. To download files from the internet: <code>curl wget</code>. The <code>xorg xorg-xinit</code> packages are to enable GUI through X Systems as I consider Wayland too early to adapt. The <code>xf86-video-amdgpu</code> package is optional and it was included because the target computer iGPU is AMD-based. The <code>polkit-gnome</code> package is optional. Some software require priviliges and they are capable to self-elevate the priviliges if <code>polkit</code> is available. It comes as a dependency of the <code>polkit-gnome</code> package. The <code>alacritty</code> terminal is the default temrinal emulator of choice. The <code>firefox</code> browser is a compromise between widely available and provided the features I like. The <code>keepassxc</code> software is a password manager tool. To connect to my Google Drive I use <code>rclone</code>. To make colours warmer during late hours I use <code>redshift</code>. The <code>p7zip</code> package is used to extract archives. The <code>pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber</code> packages are needed to manage audio. The new audio framework replacing pulse and jack. And, <code>wireplumber</code> is the pipewire session manager. The <code>bluez bluez-utils</code> packages provide <code>bluetoothctl</code>. Finally, we install a bunch of fancy fonts, <code>terminus-font nerd-fonts ttf-terminus-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-font-awesome</code>, at a cost of large storage space, i.e. aproximately 8-9 GB. On a bright side, it should cover almost any character including various emojis.</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>--sync<span class="w"> </span>sudo<span class="w"> </span>base-devel<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>xorg<span class="w"> </span>xorg-xinit<span class="w"> </span>xf86-video-amdgpu<span class="w"> </span>polkit-gnome<span class="w"> </span>alacritty<span class="w"> </span>firefox<span class="w"> </span>keepassxc<span class="w"> </span>rclone<span class="w"> </span>redshift<span class="w"> </span>p7zip<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-fonts<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
-</code></pre></div>
 <p>As in [<a href="https://forum.manjaro.org/t/bluetoothctl-missing-in-my-installation/88318">1</a>, <a href="https://wiki.archlinux.org/title/Bluetooth">2</a>], to find what package is required to install a command run the following.</p>
-<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-
-clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span>bluetoothctl
+<div class="highlight"><pre><span></span><code>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span>bluetoothctl
 </code></pre></div>
 <p>I wanted to keep the barebones Arch Linux installation as minimal as possible, so I moved console font configuration to here as a post-installation step. Append <code>/etc/vconsole.conf</code>. The <code>FONT</code> parameter depends on the <code>terminus-font</code> package, and while optional, it resolved a warning that was raised when building <code>mkinitcpio</code> [<a href="https://forum.manjaro.org/t/is-it-safe-to-remove-the-consolefont-buildhook/87086/2">1</a>]. This font is used system-wide when booting into the system.</p>
 <div class="highlight"><pre><span></span><code>FONT=ter-v20b
@@ -2327,6 +2348,9 @@ git clone git://git.suckless.org/surf ~/.local/src/surf
 <h2 id="how-to-install-and-use-rclone_1">How to Install and Use <code>rclone</code></h2>
 <p>To install <code>rclone</code>, use the command <code>sudo pacman --sync rclone</code> on Arch.</p>
 <p>To mount a Google Drive remote with rclone, use the command <code>rclone mount remote_name: /path/to/mountpoint</code> replacing <code>remote_name</code> with your configured remote and <code>/path/to/mountpoint</code> with the local folder.</p>
+<h2 id="how-to-rofi">How to Rofi</h2>
+<p>Rofi: https://github.com/davatorium/rofi
+Themes: https://github.com/adi1090x/rofi</p>
 <h2 id="appendix-a_1">Appendix A</h2>
 <p>To hide the unmounted volumes, the setting is located at <code>Settings/Ubuntu Desktop/Dock/Configure Dock Behavior/Include Unmounted Volumes</code>.</p>
 <p>Command to recursively delete files.</p>
