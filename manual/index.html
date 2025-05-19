@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/me.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
       
 
@@ -845,6 +845,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#how-to-manage-vfat-devices-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to manage VFAT devices on Linux
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1495,6 +1504,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#how-to-manage-vfat-devices-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to manage VFAT devices on Linux
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1869,6 +1887,16 @@ EndSection
 <p>Sometimes, Git Large File Storage (LFS) can cause issues. I usually resolve them with:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>lfs<span class="w"> </span>install<span class="w"> </span>--skip-repo
 </code></pre></div>
+<p>In situations where Timeshift is used to backup root, the following commands will mount selected partition at the <code>/timeshift</code> location. Start by retrieving UUID of the selected partition.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>blkid<span class="w"> </span>/dev/sda3
+</code></pre></div>
+<p>Then edit <code>/etc/fstab</code>.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/fstab
+</code></pre></div>
+<p>Add the following line at the bottom of the file, save, and exit. The drive should disappear from the dashboard on Ubuntu 24.04.2. The changes should apply after reboot.</p>
+<div class="highlight"><pre><span></span><code>/dev/disk/by-uuid/2e11a84b-8fdf-4ad3-b3d9-6da3ab1bad4f<span class="w"> </span>/timeshift<span class="w"> </span>ext4<span class="w"> </span>defaults<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<p>Instructions to backup files are detailed in [<a href="#how-to-use-timeshift">1</a>].</p>
 <h3 id="void-linux">Void Linux</h3>
 <p>Materials that were used to configure Void Linux with the following components: bspwm, sxhkd, rofi, kitty, zsh, eww, picom, neovim, firefox, thunar.</p>
 <p><strong>Window Manager &amp; UI Components</strong></p>
@@ -3281,6 +3309,33 @@ sudo<span class="w"> </span>timeshift<span class="w"> </span>--list
 sudo<span class="w"> </span>timeshift<span class="w"> </span>--restore
 </code></pre></div>
 <p>I consider tools like Back in Time, Pike Backup, or Deja Dup not user friendly because I keep facing permissions-related errors with my home directory. Therefore, I ditch the idea of using two tools to backup my stuff and focus on Timeshift only for now.</p>
+<h3 id="how-to-manage-vfat-devices-on-linux">How to manage VFAT devices on Linux</h3>
+<p>VFAT is essentially FAT32 with long filename support.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>dosfstools
+</code></pre></div>
+<p>This command will install tools such as <code>mkfs.vfat</code> and other commands that are used below.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dosfslabel<span class="w"> </span>/dev/sda1<span class="w"> </span>LABEL
+</code></pre></div>
+<p>This command will set a label to the parition. It will show up in File Explorer on Windows.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dosfsck<span class="w"> </span>-n<span class="w"> </span>/dev/sda1
+</code></pre></div>
+<p>This command will check if there are any dirty flags.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dosfsck<span class="w"> </span>-a<span class="w"> </span>/dev/sda1
+</code></pre></div>
+<p>This command will try to fix any issues with the partition including dirty flags.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The warning about the boot sector differences was solved using this command: <code>sudo mkfs.vfat -F 32 /dev/sda1</code>, i.e. simply reformatting the partition.</p>
+</div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>vfat<span class="w"> </span>-o<span class="w"> </span><span class="nv">uid</span><span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>,gid<span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span>/dev/sda1<span class="w"> </span>/mnt
+</code></pre></div>
+<p>This command will mount device with the same ownership as the user. Otherwise, it is root.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>fuser<span class="w"> </span>-m<span class="w"> </span>/dev/sda1
+sudo<span class="w"> </span>umount<span class="w"> </span>/dev/sda1
+sudo<span class="w"> </span>sync
+sudo<span class="w"> </span>eject<span class="w"> </span>/dev/sda
+</code></pre></div>
+<p>These commands are used to <strong>safely</strong> remove device from the computer.</p>
 <h2 id="appendix-a">Appendix A</h2>
 <p>To hide the unmounted volumes, the setting is located at <code>Settings/Ubuntu Desktop/Dock/Configure Dock Behavior/Include Unmounted Volumes</code>.</p>
 <p>Command to recursively delete files.</p>
@@ -3377,10 +3432,10 @@ tunnels:
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
