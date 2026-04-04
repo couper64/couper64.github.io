@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../assets/me.ico">
-      <meta name="generator" content="zensical-0.0.29">
+      <meta name="generator" content="zensical-0.0.31">
     
     
       
@@ -30,7 +30,7 @@
       
         
       
-      <link rel="stylesheet" href="../assets/stylesheets/modern/main.6f2fbb28.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.53a7feaf.min.css">
       
         
           
@@ -242,7 +242,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
       
       
         
@@ -1023,6 +1023,19 @@
               
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
                   <div class="md-sidebar__inner">
                     
 
@@ -1772,7 +1785,7 @@
 </div>
 <p>Make sure your USB flash drive is large enough; for example, if the ISO file is 1.2 GB, it is sensible to use a USB drive with at least 4 GB of storage. Once the ISO is written, plug the USB drive into the target computer. To boot from the USB, you may need to press a special key during startup — check the motherboard manual to find out which key to use (often F12, ESC, or F10).</p>
 <h3 id="installation">Installation</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Arch Linux</label><label for="__tabbed_2_2">Debian</label><label for="__tabbed_2_3">Ubuntu</label><label for="__tabbed_2_4">Void Linux</label><label for="__tabbed_2_5">Windows</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Arch Linux</label><label for="__tabbed_2_2">Debian</label><label for="__tabbed_2_3">Ubuntu</label><label for="__tabbed_2_4">Void Linux</label><label for="__tabbed_2_5">Windows</label><label for="__tabbed_2_6">Fedora</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Once the system has loaded from a USB flash drive, as mentioned in the instructions outlined in section <a href="#bootable-installation-media">1</a>, and the installation has started. You should see a <code>zsh</code> shell, where you are logged in as <code>root@archiso</code>. From this point onwards, the next step, according to the official documentation [<a href="https://wiki.archlinux.org/title/Installation_guide#Set_the_console_keyboard_layout_and_font">1</a>], is to set the keyboard layout:</p>
@@ -1936,6 +1949,7 @@
 </div>
 <div class="tabbed-block">
 <p>Once the installation has started and the system has loaded, as mentioned in the section <a href="#bootable-installation-media">1</a>. Follow on-screen instructions. Follow non-graphical wizard.</p>
+<p>Instead of regular Debian installation, follow [<a href="https://sysguides.com/install-debian-13-with-btrfs">1</a>] to setup Btrfs with snapshots and rollback.</p>
 </div>
 <div class="tabbed-block">
 <p>Once the installation has started and the system has loaded, as mentioned in the section <a href="#bootable-installation-media">1</a>. Follow on-screen instructions.</p>
@@ -2022,11 +2036,14 @@ cp /usr/share/doc/bspwm/examples/sxhkdrc $HOME/.config/sxhkd/
 <div class="tabbed-block">
 <p>Once the installation has started and the system has loaded, as mentioned in the section <a href="#bootable-installation-media">1</a>. Follow on-screen instructions.</p>
 </div>
+<div class="tabbed-block">
+<p>Setup Btrfs with snapshot and rollback support at [<a href="https://sysguides.com/install-fedora-42-with-snapshot-and-rollback-support">1</a>].</p>
+</div>
 </div>
 </div>
 <h3 id="post-installation">Post Installation</h3>
 <p>The post-installation phase involves setting up programs that are useful regardless of the system’s purpose — whether for computer vision tasks, game development, or general use. The programs listed in this section are valuable in any setup.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Arch Linux</label><label for="__tabbed_3_2">Debian</label><label for="__tabbed_3_3">Ubuntu</label><label for="__tabbed_3_4">Windows</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Arch Linux</label><label for="__tabbed_3_2">Debian</label><label for="__tabbed_3_3">Ubuntu</label><label for="__tabbed_3_4">Windows</label><label for="__tabbed_3_5">Fedora</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>After the installation of the barebones Arch Linux [<a href="#arch-linux">1</a>]. Basic terminal login should be presented to the user. Log in with your user credentials.</p>
@@ -2149,9 +2166,18 @@ Update and upgrade the system. If not root then execute <code>su -</code>.</p>
 </div>
 <div class="tabbed-block">
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
-</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>ubuntu-restricted-extras<span class="w"> </span>p7zip-full<span class="w"> </span>curl<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>btop<span class="w"> </span>neovim<span class="w"> </span>fastfetch<span class="w"> </span>timeshift<span class="w"> </span>gnome-shell-extension-manager<span class="w"> </span>ssh
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>ubuntu-restricted-extras<span class="w"> </span>p7zip-full<span class="w"> </span>curl<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>btop<span class="w"> </span>neovim<span class="w"> </span>neofetch<span class="w"> </span>gnome-shell-extension-manager<span class="w"> </span>ssh
 </span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 </span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+</span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>rm<span class="w"> </span>-rf<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+</span><span id="__span-54-6"><a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/src/
+</span><span id="__span-54-7"><a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span>sandbox
+</span><span id="__span-54-8"><a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sandbox<span class="w"> </span><span class="nv">$USER</span>
+</span><span id="__span-54-9"><a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a>newgrp<span class="w"> </span>sandbox
+</span><span id="__span-54-10"><a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>/srv/sandbox/
+</span><span id="__span-54-11"><a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a>sudo<span class="w"> </span>chgrp<span class="w"> </span>sandbox<span class="w"> </span>/srv/sandbox/
+</span><span id="__span-54-12"><a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">2775</span><span class="w"> </span>-R<span class="w"> </span>/srv/sandbox/
+</span><span id="__span-54-13"><a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a><span class="c1"># Reboot.</span>
 </span></code></pre></div>
 <p>The <code>build-essential</code> package installs important development tools, including a compiler, linker, libraries, and headers used during software compilation. Many third-party programs rely on it, and errors can occur if it is missing. It often comes pre-installed on some distributions.</p>
 <div class="admonition note">
@@ -2219,6 +2245,13 @@ Update and upgrade the system. If not root then execute <code>su -</code>.</p>
 </ul>
 </li>
 </ol>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Install NVIDIA drivers at [<a href="https://github.com/Comprehensive-Wall28/Nvidia-Fedora-Guide">1</a>].</li>
+<li>Setup virtualisation at [<a href="https://docs.fedoraproject.org/en-US/quick-docs/virtualization-getting-started/">1</a>].</li>
+<li>Install Steam at [<a href="https://docs.fedoraproject.org/en-US/gaming/proton/">1</a>].</li>
+</ul>
 </div>
 </div>
 </div>
@@ -3628,7 +3661,7 @@ tunnels:
     
     
     <a href="mailto:li.vlad.viktor@gmail.com" target="_blank" rel="noopener" title="Email Me" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
     </a>
   
 </div>
@@ -3649,7 +3682,7 @@ tunnels:
       <script id="__config" type="application/json">{"annotate":null,"base":"..","features":[],"search":"../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2b142ea.min.js"></script>
+      <script src="../assets/javascripts/bundle.91a19a9e.min.js"></script>
       
     
   </body>
