@@ -824,18 +824,67 @@
 
 <h1 id="ml-system-lifecycle">ML System Lifecycle</h1>
 <p>End-to-end stages for building and operating ML systems (roles in <code>ml-ecosystem.md</code> map to these stages).</p>
-<ol>
-<li><strong>Frame</strong>: define the ML problem, task, success metrics, constraints, assumptions, and product tradeoffs.</li>
-<li><strong>Data</strong>: prepare, validate, version, and monitor data quality, labeling, splits, leakage, feature availability, and drift.</li>
-<li><strong>Train</strong>: train models reproducibly while understanding model fundamentals, bias-variance tradeoffs, overfitting, regularization, loss functions, optimizers, learning rate schedules, and batch effects.</li>
-<li><strong>Evaluate</strong>: analyze model performance with validation/test sets, per-class and slice analysis, thresholding, calibration, robustness checks, and responsible ML considerations.</li>
-<li><strong>Package</strong>: export model artifacts, track versions, define preprocessing/postprocessing, and choose appropriate formats and runtimes.</li>
-<li><strong>Serve</strong>: run models under real latency, throughput, memory, CPU/GPU placement, scaling, batching, and application integration constraints.</li>
-<li><strong>Optimize</strong>: improve inference for target hardware using quantization, distillation, pruning, runtime tuning, and preprocessing/postprocessing optimization.</li>
-<li><strong>Test</strong>: build testing and CI/CD workflows for code, data, models, pipelines, performance, and deployment gates.</li>
-<li><strong>Operate</strong>: monitor model quality, data drift, latency, errors, cost, and business impact; use alerting, canaries, rollback, retraining, and reliability safeguards.</li>
-<li><strong>Communicate</strong>: explain decisions, assumptions, metrics, validation evidence, fairness/privacy/security risks, and product tradeoffs to technical and non-technical stakeholders.</li>
-</ol>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Goal</th>
+<th>Typical technologies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Frame</strong></td>
+<td>Define the ML problem, task, success metrics, constraints, assumptions, and product tradeoffs.</td>
+<td>Product docs, design docs, Jira/Linear, stakeholder interviews, success-metric definitions</td>
+</tr>
+<tr>
+<td><strong>2. Data</strong></td>
+<td>Prepare, validate, version, and monitor data quality, labeling, splits, leakage, feature availability, and drift.</td>
+<td>DVC, LakeFS, S3/GCS/Azure Blob, Hugging Face Datasets, Great Expectations, Pandera, data catalogs</td>
+</tr>
+<tr>
+<td><strong>3. Train</strong></td>
+<td>Train models reproducibly while understanding model fundamentals, bias-variance tradeoffs, overfitting, regularization, loss functions, optimizers, learning rate schedules, and batch effects.</td>
+<td>PyTorch, TensorFlow, JAX, Lightning, Hugging Face Transformers, MLflow, Weights &amp; Biases, TensorBoard</td>
+</tr>
+<tr>
+<td><strong>4. Evaluate</strong></td>
+<td>Analyze model performance with validation/test sets, per-class and slice analysis, thresholding, calibration, robustness checks, and responsible ML considerations.</td>
+<td>scikit-learn metrics, custom evaluation scripts, Evidently, SHAP/LIME, fairness and calibration reports</td>
+</tr>
+<tr>
+<td><strong>5. Package</strong></td>
+<td>Export model artifacts, track versions, define preprocessing/postprocessing, and choose appropriate formats and runtimes.</td>
+<td>TorchScript, ONNX, MLflow Model Registry, model cards, artifact stores, Docker build artifacts</td>
+</tr>
+<tr>
+<td><strong>6. Serve</strong></td>
+<td>Run models under real latency, throughput, memory, CPU/GPU placement, scaling, batching, and application integration constraints.</td>
+<td>FastAPI, BentoML, KServe, Seldon Core, TorchServe, Triton Inference Server, Ray Serve, Docker</td>
+</tr>
+<tr>
+<td><strong>7. Optimize</strong></td>
+<td>Improve inference for target hardware using quantization, distillation, pruning, runtime tuning, and preprocessing/postprocessing optimization.</td>
+<td>ONNX Runtime, TensorRT, OpenVINO, <code>torch.compile</code>, quantization, pruning, distillation, profiling tools</td>
+</tr>
+<tr>
+<td><strong>8. Test</strong></td>
+<td>Build testing and CI/CD workflows for code, data, models, pipelines, performance, and deployment gates.</td>
+<td>pytest, GitHub Actions, GitLab CI, Jenkins, pre-commit, model/data validation gates, load tests</td>
+</tr>
+<tr>
+<td><strong>9. Operate</strong></td>
+<td>Monitor model quality, data drift, latency, errors, cost, and business impact; use alerting, canaries, rollback, retraining, and reliability safeguards.</td>
+<td>Prometheus, Grafana, OpenTelemetry, Loki/ELK, Datadog, Arize, WhyLabs, PagerDuty, Kubernetes</td>
+</tr>
+<tr>
+<td><strong>10. Communicate</strong></td>
+<td>Explain decisions, assumptions, metrics, validation evidence, fairness/privacy/security risks, and product tradeoffs to technical and non-technical stakeholders.</td>
+<td>README files, model cards, system cards, dashboards, reports, runbooks, release notes</td>
+</tr>
+</tbody>
+</table>
 
 
 
