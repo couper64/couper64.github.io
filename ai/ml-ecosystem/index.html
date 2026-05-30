@@ -1,0 +1,1248 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ml-system-lifecycle/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/me.ico">
+      <meta name="generator" content="zensical-0.0.43">
+    
+    
+      
+        <title>Machine Learning Ecosystem - Dr Vladislav Li</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#machine-learning-ecosystem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dr Vladislav Li" class="md-header__button md-logo" aria-label="Dr Vladislav Li" data-md-component="logo">
+      
+  <img src="../../assets/me.ico" alt="Dr Vladislav Li">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dr Vladislav Li
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Machine Learning Ecosystem
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dr Vladislav Li" class="md-nav__button md-logo" aria-label="Dr Vladislav Li" data-md-component="logo">
+      
+  <img src="../../assets/me.ico" alt="Dr Vladislav Li">
+
+    </a>
+    Dr Vladislav Li
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🏠 Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📖 Manual
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🖥️ Portfolio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🤖 Artificial Intelligence
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  🤖 Artificial Intelligence
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🧠 Machine Learning
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  ⚙️ MLOps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-system-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🔁 ML System Lifecycle
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🌐 ML Ecosystem
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🌐 ML Ecosystem
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-roles-connect-in-a-typical-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How roles connect in a typical flow
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-roles-involved-in-the-ml-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Appendix: Roles Involved in the ML Ecosystem
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix: Roles Involved in the ML Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leadership-and-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Leadership and product
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business-analytics-and-decision-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Business, analytics, and decision support
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-platform-and-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Data platform and pipelines
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-creation-and-labeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Data creation and labeling
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modeling-and-applied-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Modeling and applied research
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-systems-deployment-and-reliability-mlops-target-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ML systems, deployment, and reliability (MLOps target area)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#software-engineering-product-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Software engineering (product integration)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-and-customer-facing-technical-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Architecture and customer-facing technical roles
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-safety-and-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quality, safety, and governance
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations-adjacent-to-ml-often-forgotten" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Operations adjacent to ML (often forgotten)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-roles-connect-in-a-typical-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How roles connect in a typical flow
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-roles-involved-in-the-ml-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Appendix: Roles Involved in the ML Ecosystem
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix: Roles Involved in the ML Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leadership-and-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Leadership and product
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business-analytics-and-decision-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Business, analytics, and decision support
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-platform-and-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Data platform and pipelines
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-creation-and-labeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Data creation and labeling
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modeling-and-applied-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Modeling and applied research
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-systems-deployment-and-reliability-mlops-target-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ML systems, deployment, and reliability (MLOps target area)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#software-engineering-product-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Software engineering (product integration)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-and-customer-facing-technical-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Architecture and customer-facing technical roles
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-safety-and-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quality, safety, and governance
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations-adjacent-to-ml-often-forgotten" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Operations adjacent to ML (often forgotten)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="machine-learning-ecosystem">Machine Learning Ecosystem</h1>
+<p>The <strong>machine learning ecosystem</strong> is the full network of people, organizations, tools, and practices involved in turning data and models into useful, reliable, and responsible real-world systems.</p>
+<h2 id="how-roles-connect-in-a-typical-flow">How roles connect in a typical flow</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PM / Analyst          →  define problem and metrics
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Data Engineer         →  build reliable data pipelines
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Annotators / SMEs     →  create ground truth
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Scientist / MLE       →  train and evaluate models
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>MLOps / Platform      →  package, deploy, monitor, retrain
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Backend / Mobile      →  integrate into product
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>SRE / Security        →  reliability and safety in production
+</span></code></pre></div>
+<p><strong>MLOps engineer</strong> sits at the center of <strong>train → ship → observe → improve</strong>, and collaborates with many roles across the ecosystem. You rarely need to <em>be</em> all of them; you need to know what each owns and what the handoffs look like.</p>
+<p>See the appendix below for a broader reference list of roles involved in the ML ecosystem.</p>
+<h2 id="appendix-roles-involved-in-the-ml-ecosystem">Appendix: Roles Involved in the ML Ecosystem</h2>
+<p>Titles vary by company; many roles overlap. Grouped by where they typically sit in the ML lifecycle.</p>
+<h3 id="leadership-and-product">Leadership and product</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Product Manager (PM)</strong></td>
+<td>Problem definition, priorities, success metrics, roadmap</td>
+</tr>
+<tr>
+<td><strong>AI / ML Product Manager</strong></td>
+<td>ML-specific product bets, feasibility, user impact of model behavior</td>
+</tr>
+<tr>
+<td><strong>Program Manager / TPM</strong></td>
+<td>Cross-team delivery, milestones, dependencies</td>
+</tr>
+<tr>
+<td><strong>Engineering Manager / Director of ML</strong></td>
+<td>Team structure, hiring, technical direction</td>
+</tr>
+<tr>
+<td><strong>Chief Data Officer (CDO) / Chief AI Officer</strong></td>
+<td>Data/AI strategy, governance, org-wide investment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="business-analytics-and-decision-support">Business, analytics, and decision support</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Business Analyst</strong></td>
+<td>Requirements, KPIs, stakeholder alignment</td>
+</tr>
+<tr>
+<td><strong>Data Analyst</strong></td>
+<td>SQL, dashboards, exploratory analysis, reporting</td>
+</tr>
+<tr>
+<td><strong>Analytics Engineer</strong></td>
+<td>Trusted metrics layers, dbt-style pipelines, semantic models</td>
+</tr>
+<tr>
+<td><strong>Data Scientist (analytics-heavy)</strong></td>
+<td>Experimentation, causal inference, forecasting, insights</td>
+</tr>
+<tr>
+<td><strong>Decision Scientist</strong></td>
+<td>Policy and product decisions from data and models</td>
+</tr>
+<tr>
+<td><strong>Quantitative Analyst (Quant)</strong></td>
+<td>Statistical/financial modeling (finance, trading, risk)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-platform-and-pipelines">Data platform and pipelines</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Engineer</strong></td>
+<td>Ingestion, warehousing, batch/stream pipelines, data quality</td>
+</tr>
+<tr>
+<td><strong>Analytics / BI Engineer</strong></td>
+<td>Reporting stacks, warehouse modeling</td>
+</tr>
+<tr>
+<td><strong>Database Administrator (DBA)</strong></td>
+<td>Storage, performance, backups (when data is central)</td>
+</tr>
+<tr>
+<td><strong>Feature Engineer / ML Data Engineer</strong></td>
+<td>Training-serving feature pipelines, feature stores</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-creation-and-labeling">Data creation and labeling</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Annotator / Labeler</strong></td>
+<td>Bounding boxes, tags, transcripts, rankings</td>
+</tr>
+<tr>
+<td><strong>Annotation Lead / Operations Manager</strong></td>
+<td>Guidelines, QA, vendor/crowd management</td>
+</tr>
+<tr>
+<td><strong>Domain Expert / Subject-Matter Expert (SME)</strong></td>
+<td>Correct labels, edge cases, evaluation rubrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modeling-and-applied-research">Modeling and applied research</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ML / AI Research Scientist</strong></td>
+<td>Novel methods, papers, long-horizon R&amp;D</td>
+</tr>
+<tr>
+<td><strong>Applied Scientist</strong></td>
+<td>Research applied to product problems; often closer to shipping</td>
+</tr>
+<tr>
+<td><strong>Machine Learning Engineer (MLE)</strong></td>
+<td>Train, evaluate, integrate models into product code</td>
+</tr>
+<tr>
+<td><strong>Deep Learning Engineer</strong></td>
+<td>Neural nets at scale (vision, NLP, speech, multimodal)</td>
+</tr>
+<tr>
+<td><strong>Computer Vision Engineer</strong></td>
+<td>Images/video: detection, segmentation, tracking</td>
+</tr>
+<tr>
+<td><strong>NLP / LLM Engineer</strong></td>
+<td>Text, embeddings, RAG, fine-tuning, agents</td>
+</tr>
+<tr>
+<td><strong>Recommendation Systems Engineer</strong></td>
+<td>Ranking, retrieval, personalization</td>
+</tr>
+<tr>
+<td><strong>Speech / Audio ML Engineer</strong></td>
+<td>ASR, TTS, diarization, audio understanding</td>
+</tr>
+<tr>
+<td><strong>Reinforcement Learning Engineer</strong></td>
+<td>Policies, simulators, control (robotics, games, ads)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ml-systems-deployment-and-reliability-mlops-target-area">ML systems, deployment, and reliability (MLOps target area)</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MLOps Engineer</strong></td>
+<td>CI/CD for ML, registries, deployment, monitoring, retraining</td>
+</tr>
+<tr>
+<td><strong>ML Platform Engineer</strong></td>
+<td>Internal platforms: training, serving, experiment tracking</td>
+</tr>
+<tr>
+<td><strong>ML Infrastructure Engineer</strong></td>
+<td>GPUs, clusters, schedulers, cost, scale</td>
+</tr>
+<tr>
+<td><strong>ML Systems Engineer</strong></td>
+<td>End-to-end performance: training + inference systems</td>
+</tr>
+<tr>
+<td><strong>Model Deployment / Inference Engineer</strong></td>
+<td>Serving runtimes, latency, formats (ONNX, TensorRT, etc.)</td>
+</tr>
+<tr>
+<td><strong>DevOps Engineer</strong></td>
+<td>Infra as code, containers, releases (often paired with MLOps)</td>
+</tr>
+<tr>
+<td><strong>Site Reliability Engineer (SRE)</strong></td>
+<td>SLOs, incidents, capacity; <strong>ML SRE</strong> when focused on model serving</td>
+</tr>
+<tr>
+<td><strong>Performance / Optimization Engineer</strong></td>
+<td>Profiling, quantization, batching, hardware-specific tuning</td>
+</tr>
+</tbody>
+</table>
+<h3 id="software-engineering-product-integration">Software engineering (product integration)</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend Engineer</strong></td>
+<td>APIs, services, auth, integration with model servers</td>
+</tr>
+<tr>
+<td><strong>Frontend Engineer</strong></td>
+<td>UIs that surface predictions, explanations, human-in-the-loop</td>
+</tr>
+<tr>
+<td><strong>Full-Stack Engineer</strong></td>
+<td>End-to-end product features including ML-backed flows</td>
+</tr>
+<tr>
+<td><strong>Mobile Engineer</strong></td>
+<td>On-device ML, Core ML / TFLite / NNAPI integration</td>
+</tr>
+<tr>
+<td><strong>Embedded / Edge Engineer</strong></td>
+<td>MCU/SoC deployment, real-time constraints</td>
+</tr>
+<tr>
+<td><strong>Game / Graphics Engineer</strong></td>
+<td>Runtime integration (e.g. NPC AI, anti-cheat, procedural content)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="architecture-and-customer-facing-technical-roles">Architecture and customer-facing technical roles</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Solutions Architect</strong></td>
+<td>Customer designs on cloud ML stacks</td>
+</tr>
+<tr>
+<td><strong>ML Solutions Architect</strong></td>
+<td>Reference architectures for training and inference</td>
+</tr>
+<tr>
+<td><strong>Sales Engineer / Field Engineer</strong></td>
+<td>Demos, POCs, technical pre-sales</td>
+</tr>
+<tr>
+<td><strong>Customer Success Engineer</strong></td>
+<td>Adoption, integration support post-sale</td>
+</tr>
+<tr>
+<td><strong>Developer Advocate</strong></td>
+<td>Docs, samples, community, feedback to product</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quality-safety-and-governance">Quality, safety, and governance</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ML QA / Test Engineer</strong></td>
+<td>Data tests, model tests, regression suites, golden sets</td>
+</tr>
+<tr>
+<td><strong>Security Engineer (ML)</strong></td>
+<td>Model theft, prompt injection, supply chain, access control</td>
+</tr>
+<tr>
+<td><strong>Privacy Engineer</strong></td>
+<td>PII, consent, anonymization, regulatory alignment</td>
+</tr>
+<tr>
+<td><strong>Trust &amp; Safety Specialist</strong></td>
+<td>Abuse, harmful content, policy enforcement (often ML-assisted)</td>
+</tr>
+<tr>
+<td><strong>Responsible AI / AI Ethics</strong></td>
+<td>Fairness, transparency, risk assessments</td>
+</tr>
+<tr>
+<td><strong>AI Governance / Risk / Compliance</strong></td>
+<td>Policies, audits, model inventory, regulatory readiness</td>
+</tr>
+<tr>
+<td><strong>Legal / Policy (AI)</strong></td>
+<td>Contracts, IP, EU AI Act-style obligations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="operations-adjacent-to-ml-often-forgotten">Operations adjacent to ML (often forgotten)</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Typical focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Technical Writer</strong></td>
+<td>API docs, runbooks, model cards</td>
+</tr>
+<tr>
+<td><strong>UX Researcher / Designer</strong></td>
+<td>How users experience uncertain or wrong predictions</td>
+</tr>
+<tr>
+<td><strong>Finance / FinOps</strong></td>
+<td>GPU and cloud spend, unit economics of inference</td>
+</tr>
+<tr>
+<td><strong>HR / Recruiting</strong></td>
+<td>Sourcing ML talent (specialized interviewing)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="mailto:li.vlad.viktor@gmail.com" target="_blank" rel="noopener" title="Email Me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":[],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6e5f0216.min.js"></script>
+      
+    
+  </body>
+</html>
