@@ -1,0 +1,1519 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../portfolio/">
+      
+      
+        <link rel="next" href="../debian/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/me.ico">
+      <meta name="generator" content="zensical-0.0.45">
+    
+    
+      
+        <title>Arch Linux - Dr Vladislav Li</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arch-linux" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dr Vladislav Li" class="md-header__button md-logo" aria-label="Dr Vladislav Li" data-md-component="logo">
+      
+  <img src="../../assets/me.ico" alt="Dr Vladislav Li">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dr Vladislav Li
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Arch Linux
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dr Vladislav Li" class="md-nav__button md-logo" aria-label="Dr Vladislav Li" data-md-component="logo">
+      
+  <img src="../../assets/me.ico" alt="Dr Vladislav Li">
+
+    </a>
+    Dr Vladislav Li
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🏠 Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📖 Manual
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🖥️ Portfolio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  💻 Operating System
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  💻 Operating System
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Arch Linux
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Arch Linux
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Post Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Debian
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Ubuntu
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../void-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Void Linux
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fedora/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🐧 Fedora
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../raspbian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🥧 Raspbian
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🪟 Windows
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🤖 Artificial Intelligence
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  🤖 Artificial Intelligence
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🧠 Machine Learning
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  ⚙️ MLOps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🔁 ML System Lifecycle
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  🔁 ML System Lifecycle
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📜 Overview
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/01-frame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Frame
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/02-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/03-train/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Train
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/04-evaluate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Evaluate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/05-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Package
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/06-serve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Serve
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/07-optimize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Optimize
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/08-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Test
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/09-operate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Operate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-system-lifecycle/10-communicate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  📦 Communicate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ml-ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  🌐 ML Ecosystem
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Post Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="arch-linux">Arch Linux</h1>
+<h2 id="installation">Installation</h2>
+<p>Once the system has loaded from a USB flash drive, as mentioned in <a href="../../manual/#bootable-installation-media">Bootable Installation Media</a>, and the installation has started. You should see a <code>zsh</code> shell, where you are logged in as <code>root@archiso</code>. From this point onwards, the next step, according to the official documentation <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, is to set the keyboard layout:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>loadkeys<span class="w"> </span>uk
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In situations, where the layout name is unknown, the <code>localectl list-keymaps</code> command would list all available layouts that could be viewed using regular arrow keys in a terminal.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>localectl<span class="w"> </span>list-keymaps
+</span></code></pre></div>
+</div>
+<p>Based on the quick Google search, good UK fonts are <code>ter-v32b</code>, <code>Uni2-Terminus16</code>, <code>Lat2-Terminus32x16</code>, and <code>Lat2-Terminus16</code>. The <code>ter-v20b</code> font is a smaller variant which seems to be a good fit for my monitor size, i.e. 24″ at 1080p.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These fonts won't be available in the installed system unless explicitly installed.</p>
+</div>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>setfont<span class="w"> </span>ter-v20b
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Similar to the layout name, it possible to preview the fonts using a command to list all files in the fonts folder. The <code>--color=always</code> and <code>-R</code> parameters are to preserve the colour in the output.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ls<span class="w"> </span>-lash<span class="w"> </span>--color<span class="o">=</span>always<span class="w"> </span>/usr/share/kbd/consolefonts/<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-R
+</span></code></pre></div>
+</div>
+<p>Verify the boot mode <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. The output could be either <code>64</code> or <code>32</code>, in my case it was <code>64</code>. There could be situations where the file is missing. In such situations, it means the system was booted in BIOS mode.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>/sys/firmware/efi/fw_platform_size
+</span></code></pre></div>
+<p>Verify the networking status by first checking if the network interface is up. Importantly, the <code>UP</code> flag appears inside angle brackets. In my case, it was easy to mistake this for <code>state DOWN</code>, especially since the latter was highlighted in red due to the <code>--color</code> parameter.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ip<span class="w"> </span>--color<span class="w"> </span>link
+</span></code></pre></div>
+<p>If the connection is down and the only way is to use WiFi, then use <code>iwctl</code>. From an extensive search on the internet, this command seems to be the easiest and most recommended way of connecting to Wi-Fi.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>iwtcl
+</span></code></pre></div>
+<p>There could be a special situation where we would be bound to notorious <code>eduroam</code>. Then we have to create a configuration file and let <code>iwctl</code> to pick it up. An example file is stored at <code>project/archlinux/var/lib/iwd/eduroam.8021x</code> which is a configuration for the <code>eduroam</code> network using login and password. Required by <code>iwctl</code>. There is <code>project/archlinux/var/lib/iwd/eduroam.8021x</code> which is a configuration to let built-in DHCP daemon resolve an IP address for the host. In case if the installed OS plans to use <code>iwctl</code> to connect to <code>eduroam</code> later then install <code>iwd</code> and <code>dhcpdc</code> and then <code>systemctl enable iwd</code> and <code>systemctl enable dhcpdc</code> to run the daemons on the system start up. Then inside the <code>iwctl</code> tool:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>device list
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>station wlan0 scan
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>station wlan0 get-networks
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>station wlan connect [network_name]
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>exit
+</span></code></pre></div>
+<p>Check the internet connection:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ping<span class="w"> </span>archlinux.org
+</span></code></pre></div>
+<p>Manually check and sync the time and date:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>timedatectl
+</span></code></pre></div>
+<p>List the available storage devices and their locations:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>lsblk
+</span></code></pre></div>
+<p>In my case, it listed <code>/dev/nvme0n1</code>. Then, I used the <code>fdisk</code> utility to partition the drive:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fdisk<span class="w"> </span>/dev/nvme0n1
+</span></code></pre></div>
+<p>Next, you are presented with a somewhat interactive text-based interface (TUI), although, in my opinion, it uses a rather cryptic method of operation. For example, it uses a single letter <code>p</code> to list information about the current partitioning, if any. I would personally prefer to type out full commands, but we have to work with what is provided. At this stage, I created an <code>EFI</code>, a <code>swap</code>, and a <code>Linux filesystem</code> partition. This part is not detailed in the official guide, as partitioning schemes are use-case specific. Fortunately, the author in <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> offers some helpful hints.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>g # Create GPT.
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>ENTER
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>n # Create new partition.
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>ENTER
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>ENTER
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>ENTER
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>+512M
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>ENTER
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>t # Change type.
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>ENTER
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>ENTER
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>1 # To EFI.
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>ENTER
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>n # Create new partition.
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>ENTER
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>ENTER
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>ENTER
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>+32G
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>ENTER
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>t # Change type.
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>ENTER
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>ENTER
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>swap # To swap.
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>ENTER
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>n # Create new partition.
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>ENTER
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>ENTER
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>ENTER
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>ENTER
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>p # View the results so far.
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>ENTER
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>w # Write it.
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>ENTER
+</span></code></pre></div>
+<p>Format the partitions:</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkfs.fat<span class="w"> </span>-F<span class="w"> </span><span class="m">32</span><span class="w"> </span>/dev/nvme0n1p1
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>mkswap<span class="w"> </span>/dev/nvme0n1p2
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>mkfs.ext4<span class="w"> </span>/dev/nvme0n1p3
+</span></code></pre></div>
+<p>Now, mount the file systems. Be careful with the order here: first mount the main filesystem, and then mount the EFI system partition. If you mount them in the wrong order, the EFI mount point may overwrite itself and fail to appear correctly in <code>/etc/fstab</code> later.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mount<span class="w"> </span>/dev/nvme0n1p3<span class="w"> </span>/mnt
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mount<span class="w"> </span>--mkdir<span class="w"> </span>/dev/nvme0n1p1<span class="w"> </span>/mnt/boot
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>swapon<span class="w"> </span>/dev/nvme0n1p2
+</span></code></pre></div>
+<p>Install the essential packages: <code>base</code>, <code>linux</code>, and <code>linux-firmware</code>. These form the minimum needed to have a functional operating system.</p>
+<p>The <code>efibootmgr</code> and <code>grub</code> packages are required to pass control from the UEFI firmware to the Linux kernel. There are other bootloaders available, but I am most familiar with these. Without these packages, the rest of the installation would not work.</p>
+<p>It is possible to install <code>amd-ucode</code> after booting into Arch Linux, but it is best to install it during setup so that it can be loaded early through the bootloader for full effect. If you are using an Intel CPU, use <code>intel-ucode</code> instead. If you are in a VM then the microcode packages should be omitted.</p>
+<p>The <code>networkmanager</code> package is needed to connect to the internet after the installation, in order to complete the post-installation setup. For most users, <em>NetworkManager</em> is the better choice due to its ease of use, GUI support, and good compatibility with desktop environments. Although, <em>iwd</em> is lighter and faster, but it is better suited for minimal or embedded setups.</p>
+<p>The <code>neovim</code> package is needed to provide a text editing tool. For instance, to edit <code>/etc/locale.gen</code> file later on. And, it so happened, my text editor of choice is <code>neovim</code>.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pacstrap<span class="w"> </span>-K<span class="w"> </span>/mnt<span class="w"> </span>base<span class="w"> </span>linux<span class="w"> </span>linux-firmware<span class="w"> </span>efibootmgr<span class="w"> </span>grub<span class="w"> </span>networkmanager<span class="w"> </span>neovim<span class="w"> </span>amd-ucode
+</span></code></pre></div>
+<p>Generate an <code>fstab</code> file.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>genfstab<span class="w"> </span>-U<span class="w"> </span>/mnt<span class="w"> </span>&gt;&gt;<span class="w"> </span>/mnt/etc/fstab
+</span></code></pre></div>
+<p>Verify <code>/etc/fstab</code>.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vim<span class="w"> </span>/mnt/etc/fstab
+</span></code></pre></div>
+<p>Change root into the new system.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>arch-chroot<span class="w"> </span>/mnt
+</span></code></pre></div>
+<p>Set the time zone.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/usr/share/zoneinfo/Europe/London<span class="w"> </span>/etc/localtime
+</span></code></pre></div>
+<p>Run hwclock to generate <code>/etc/adjtime</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>hwclock<span class="w"> </span>--systohc
+</span></code></pre></div>
+<p>Edit <code>/etc/locale.gen</code> and uncomment <code>en_GB.UTF-8 UTF-8</code> and other needed UTF-8 locales. Then, generate the locales.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>locale-gen
+</span></code></pre></div>
+<p>Create the <code>/etc/locale.conf</code> file, and set the LANG variable accordingly.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">LANG</span><span class="o">=</span>en_GB.UTF-8
+</span></code></pre></div>
+<p>If you set the console keyboard layout, make the changes persistent in <code>/etc/vconsole.conf</code>. Later on, we can also change the font of the console <a href="#post-installation">Post Installation</a>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">KEYMAP</span><span class="o">=</span>uk
+</span></code></pre></div>
+<p>Create the <code>/etc/hostname</code> file.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Standard-PC
+</span></code></pre></div>
+<p>Set the root password.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>passwd
+</span></code></pre></div>
+<p>Add user.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>useradd<span class="w"> </span>-mG<span class="w"> </span>wheel<span class="w"> </span>user
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>passwd<span class="w"> </span>user
+</span></code></pre></div>
+<p>Deploy grub.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>grub-install<span class="w"> </span>--target<span class="o">=</span>x86_64-efi<span class="w"> </span>--efi-directory<span class="o">=</span>/boot<span class="w"> </span>--bootloader-id<span class="o">=</span>GRUB
+</span></code></pre></div>
+<p>Generate the grub configuration (it will include the microcode installed with <code>pacstrap</code> earlier).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>grub-mkconfig<span class="w"> </span>-o<span class="w"> </span>/boot/grub/grub.cfg
+</span></code></pre></div>
+<p>Enable NetworkManager before rebooting. This is considered good practice within the community. The main reason is to ensure network connectivity after rebooting, especially in situations where an SSH service is set up and there is no input or output available, such as no keyboard, mouse, or monitor connected to the system.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>NetworkManager
+</span></code></pre></div>
+<p>Exit from <code>chroot</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nb">exit</span>
+</span></code></pre></div>
+<p>Unmount everything to check if the drive is busy.</p>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>umount<span class="w"> </span>-R<span class="w"> </span>/mnt
+</span></code></pre></div>
+<p>Reboot the system and unplug the installation media.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instead, I prefer to shutdown the PC, unplug the USB drive, and manually boot back.</p>
+</div>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>shutdown<span class="w"> </span>-h<span class="w"> </span>now
+</span></code></pre></div>
+<h2 id="post-installation">Post Installation</h2>
+<p>After the installation of the barebones Arch Linux <a href="#installation">Installation</a>. Basic terminal login should be presented to the user. Log in with your user credentials.</p>
+<p>Once logged in, ensure that the internet connection is working. Refer to the <code>ip --color link</code> command mentioned in <a href="#installation">Installation</a> to verity the networking status. In situations where there is only Wi-Fi then use <code>nmcli</code>. Otherwise, the wire connection usually picked up automatically.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>nmcli<span class="w"> </span>device<span class="w"> </span>wifi<span class="w"> </span>list
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>nmcli<span class="w"> </span>device<span class="w"> </span>wifi<span class="w"> </span>connect<span class="w"> </span>*SSID*<span class="w"> </span>password<span class="w"> </span>*your_wifi_password*
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>nmcli<span class="w"> </span>connection<span class="w"> </span>show
+</span></code></pre></div>
+<p>Enable and start the time synchronisation service. It requires an active internet connection to synchronise the system clock with online NTP servers.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<p>Configure pacman and mirrors. All was okay for me, so I just skimmed it through and left it as is.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nvim<span class="w"> </span>/etc/pacman.d/mirrorlist
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>nvim<span class="w"> </span>/etc/pacman.conf
+</span></code></pre></div>
+<p>Update and upgrade the system. If not root then execute <code>su -</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>pacman<span class="w"> </span>-Syu
+</span></code></pre></div>
+<p>To proceed further, it is paramount to install custom packages to help better manage hardware resources and improve overall UX. The <code>sudo</code> package is important, it allows us to run as super user. The <code>base-devel</code> package group in Arch Linux provides essential development tools like <code>make</code>, <code>gcc</code>, and <code>binutils</code>, which are required to compile software, especially when using the AUR (Arch User Repository) <a href="../../manual/#what-are-the-base-devel-dependencies">What Are The Base Devel Dependencies</a>. The <code>openssh</code> package is used to ssh and manage keys. The <code>man</code> package to "read the f-ing manual" <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. The <code>git git-lfs</code> packages are there because of VCS <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>. To download files from the internet: <code>curl wget</code>. The <code>xorg xorg-xinit</code> packages are to enable GUI through X Systems as I consider Wayland too early to adapt. The <code>xf86-video-amdgpu</code> package is optional and it was included because the target computer iGPU is AMD-based. The <code>polkit-gnome</code> package is optional. Some software require priviliges and they are capable to self-elevate the priviliges if <code>polkit</code> is available. It comes as a dependency of the <code>polkit-gnome</code> package. The <code>alacritty</code> terminal is the default temrinal emulator of choice. The <code>firefox</code> browser is a compromise between widely available and provided the features I like. The <code>keepassxc</code> software is a password manager tool. To connect to my Google Drive I use <code>rclone</code>. To make colours warmer during late hours I use <code>redshift</code>. The <code>p7zip</code> package is used to extract archives. The <code>pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber</code> packages are needed to manage audio. The new audio framework replacing pulse and jack. And, <code>wireplumber</code> is the pipewire session manager. The <code>bluez bluez-utils</code> packages provide <code>bluetoothctl</code>. Finally, we install a bunch of fancy fonts, <code>terminus-font nerd-fonts ttf-terminus-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-font-awesome</code>, at a cost of large storage space, i.e. aproximately 8-9 GB. On a bright side, it should cover almost any character including various emojis. If not root then execute <code>su -</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>pacman<span class="w"> </span>--sync<span class="w"> </span>sudo<span class="w"> </span>base-devel<span class="w"> </span>openssh<span class="w"> </span>man<span class="w"> </span>git<span class="w"> </span>git-lfs<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>xorg<span class="w"> </span>xorg-xinit<span class="w"> </span>xf86-video-amdgpu<span class="w"> </span>polkit-gnome<span class="w"> </span>alacritty<span class="w"> </span>firefox<span class="w"> </span>keepassxc<span class="w"> </span>rclone<span class="w"> </span>redshift<span class="w"> </span>p7zip<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse<span class="w"> </span>pipewire-jack<span class="w"> </span>wireplumber<span class="w"> </span>bluez<span class="w"> </span>bluez-utils<span class="w"> </span>terminus-font<span class="w"> </span>nerd-fonts<span class="w"> </span>ttf-terminus-nerd<span class="w"> </span>noto-fonts<span class="w"> </span>noto-fonts-cjk<span class="w"> </span>noto-fonts-emoji<span class="w"> </span>noto-fonts-extra<span class="w"> </span>ttf-font-awesome
+</span></code></pre></div>
+<p>Setup <em>sudo</em> priviliges for the <em>wheel</em> group by uncommenting the <code>%wheel ALL=(ALL:ALL) ALL</code> line.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don't need to reboot the PC for the changes to take effect.</p>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>su<span class="w"> </span>-
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="nv">EDITOR</span><span class="o">=</span>nvim<span class="w"> </span>visudo
+</span></code></pre></div>
+<p>Here's how you can set <code>EDITOR=nvim</code> system-wide on Arch Linux or similar systems using <code>/etc/environment</code>. Open <code>/etc/environment</code> with root privileges:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/environment
+</span></code></pre></div>
+<p>Add the line below (or modify if <code>EDITOR</code> already exists). And, save and exit. This change applies to all users at next login.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="nv">EDITOR</span><span class="o">=</span>nvim
+</span></code></pre></div>
+<p>As in <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup><sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>, to find what package is required to install a command run the following.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span>bluetoothctl
+</span></code></pre></div>
+<p>I wanted to keep the barebones Arch Linux installation as minimal as possible, so I moved console font configuration to here as a post-installation step. Append <code>/etc/vconsole.conf</code>. The <code>FONT</code> parameter depends on the <code>terminus-font</code> package, and while optional, it resolved a warning that was raised when building <code>mkinitcpio</code> <sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>. This font is used system-wide when booting into the system.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>FONT=ter-v20b
+</span></code></pre></div>
+<p>After modification, the initial RAM file system needs to be rebuilt. After reboot, the console fonts should change to the one specified in the configuration file.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>sudo<span class="w"> </span>mkinitcpio<span class="w"> </span>-p<span class="w"> </span>linux
+</span></code></pre></div>
+<p>To enable bluetooth, ensure <code>bluez</code>, and <code>bluez-utils</code> are installed on the system. The utilities package should contain <code>bluetoothctl</code> command <sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>. Enable and start the service.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>bluetooth
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>bluetooth
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>bluetooth
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>clear<span class="w"> </span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>bluetooth
+</span></code></pre></div>
+<p>To connect a device via <code>bluetoothctl</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>bluetoothctl
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>power on
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>agent on
+</span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>scan on
+</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>pair &lt;MAC&gt;
+</span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>connect &lt;MAC&gt;
+</span><span id="__span-45-7"><a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>trust &lt;MAC&gt;
+</span></code></pre></div>
+<p>The most up-to-date approach to manage audio seems to be <code>pipewire</code> but it comes with its own quirks like <code>rtkit</code> warnings <sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup>. On a bright side, it seems like it works out-of-the-box.</p>
+<p>At this point, it might be a good idea to install a GUI like <code>dwm</code>. Refer to the instructions in <a href="../../manual/#dwm">dwm</a> to install <code>dwm</code>.</p>
+<p>Since we installed <em>polkit</em> and the agent, let's add it to the <code>.xinitrc</code>. This is optional as it requires <em>polkit</em> and implies that we use WM instead of a DE.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nb">exec</span><span class="w"> </span>/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1<span class="w"> </span><span class="p">&amp;</span>
+</span></code></pre></div>
+<p>At this point, the customised part of <code>~/.xinitrc</code> should have the following. To find <code>ATITUDE:LONGITUDE</code> for Redshift follow the instructions at <sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup>.
+51.50853, -0.12574
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="c1"># my rules</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>setxkbmap<span class="w"> </span>gb
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>status<span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>redshift<span class="w"> </span>-P<span class="w"> </span>-O<span class="w"> </span><span class="m">2700</span><span class="w"> </span>-l<span class="w"> </span>LATITUDE:LONGITUDE<span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="nb">exec</span><span class="w"> </span>/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1<span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="nb">exec</span><span class="w"> </span>dwm
+</span></code></pre></div></p>
+<p>And, <code>~/.bashrc</code> should have the following.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="nb">alias</span><span class="w"> </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;LC_COLLATE=C ls --color=auto --group-directories-first --sort=version&#39;</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;ls -lashF&#39;</span>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="nv">PATH</span><span class="o">=</span>~/.local/bin:<span class="nv">$PATH</span>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="c1"># By default, Arch would use `vi` as the default editor.</span>
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>nvim
+</span></code></pre></div>
+<p>There was a situation where the PC used iGPU to calculate graphics but used dGPU to output graphics. In situations where the PC should be forced to use <code>xf86-video-amdgpu</code> modify <code>/etc/X11/xorg.conf.d/xorg.conf</code>. Bare in mind that <code>"PCI:19:0:0"</code> is taken from the output of <code>lspci -nnk</code>, where the numbers are represented in <strong>hexadecimal</strong> format but the <code>BusID</code> is in <strong>decimal</strong> format. I didn't need to append zeros at the beginning, e.g. <code>PCI:0:19:0</code> is invalid.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>Section &quot;Device&quot;
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>    Identifier &quot;iGPU&quot;
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>    Driver &quot;amdgpu&quot;
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>    BusID &quot;PCI:19:0:0&quot;
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>EndSection
+</span></code></pre></div>
+<p>At this point, the installation of Arch Linux should be somewhat usable. Further information on post-installation advices is available at <sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>https://wiki.archlinux.org/title/Installation_guide#Set_the_console_keyboard_layout_and_font&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>https://wiki.archlinux.org/title/Installation_guide#Verify_the_boot_mode&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae#main-installation&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>https://en.wikipedia.org/wiki/Jargon_File&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>https://en.wikipedia.org/wiki/Version_control&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>https://forum.manjaro.org/t/bluetoothctl-missing-in-my-installation/88318&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>https://wiki.archlinux.org/title/Bluetooth&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>https://forum.manjaro.org/t/is-it-safe-to-remove-the-consolefont-buildhook/87086/2&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>https://wiki.archlinux.org/title/Bluetooth&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>https://github.com/NixOS/nixpkgs/issues/382076&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>https://wiki.archlinux.org/title/Redshift&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>https://wiki.archlinux.org/title/General_recommendations&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="mailto:li.vlad.viktor@gmail.com" target="_blank" rel="noopener" title="Email Me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":[],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6e5f0216.min.js"></script>
+      
+    
+  </body>
+</html>
