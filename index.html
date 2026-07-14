@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="./assets/me.ico">
-      <meta name="generator" content="zensical-0.0.45">
+      <meta name="generator" content="zensical-0.0.50">
     
     
       
@@ -28,7 +28,7 @@
       
         
       
-      <link rel="stylesheet" href="./assets/stylesheets/modern/main.fba56155.min.css">
+      <link rel="stylesheet" href="./assets/stylesheets/modern/main.62c9b9cc.min.css">
       
         
           
@@ -1489,6 +1489,7 @@
 <li>Docker and Docker Compose — multi-stage builds, containerised ML service design, multi-service orchestration</li>
 <li>CI/CD — GitHub Actions: automated test, build, and deployment pipelines; multi-repo synchronisation</li>
 <li>ML model serving — inference pipeline design, GPU workload management, throughput optimisation</li>
+<li>ONNX Runtime — production real-time inference (50 Hz locomotion policy execution)</li>
 <li>Experiment tracking — Weights &amp; Biases</li>
 <li>Kubernetes — local kubeadm cluster; workload deployment and basic cluster orchestration</li>
 <li>Grafana — infrastructure and service monitoring dashboards</li>
@@ -1497,12 +1498,21 @@
 <p><strong>ML &amp; Computer Vision</strong></p>
 <ul>
 <li>PyTorch, TensorFlow/Keras — model training, fine-tuning, and evaluation</li>
-<li>Object detection — YOLOv3, YOLOv5, YOLOv9, YOLOX, Faster R-CNN, CenterNet, RetinaNet; few-shot detection and data augmentation strategies</li>
+<li>Object detection — YOLOv3, YOLOv5, YOLOv9, YOLOX, RT-DETR, Faster R-CNN, CenterNet, RetinaNet; few-shot detection and data augmentation strategies</li>
+<li>Multi-object tracking — ByteTrack; real-time person tracking with stable ID assignment</li>
 <li>Generative models — StyleGAN2, Stable Diffusion 1.5 with LoRA fine-tuning, TimeGAN (time-series synthesis), ESRGAN (super resolution)</li>
 <li>Model distillation — PatchTST, MobileNetV3→MobileNetV2; wrapping partner pipelines in production stacks</li>
 <li>Continuous / lifelong learning — image and time-series domains</li>
 <li>OpenCV — image processing, augmentation, and evaluation pipelines</li>
 <li>Few-shot learning — survey-level depth; energy-efficient inference for industrial edge settings</li>
+</ul>
+<p><strong>Robotics &amp; Simulation</strong></p>
+<ul>
+<li>MuJoCo — physics simulation; sim-to-real pipeline with HAL abstraction</li>
+<li>Behavior Trees — py-trees; reactive robot coordination, task sequencing, failure recovery</li>
+<li>CycloneDDS — real-time publish/subscribe middleware for hardware robot communication</li>
+<li>MCAP + Rerun — session recording, replay, and multi-stream synchronized data visualization</li>
+<li>Safety-critical systems — geofence enforcement, e-stop integration, velocity warmup, watchdog processes</li>
 </ul>
 <p><strong>Backend Engineering</strong></p>
 <ul>
@@ -1525,6 +1535,8 @@
 <p><strong>Programming</strong></p>
 <ul>
 <li>Python — primary language for backend systems, ML tooling, and automation</li>
+<li>Rust — systems-level desktop application development (Tauri)</li>
+<li>TypeScript / React — desktop editor frontend, 3D viewport (React Three Fiber)</li>
 <li>C / C++ — performance-critical and systems-level programming</li>
 <li>C# — application development (Unity, XR platforms)</li>
 <li>Lua — production reverse proxy scripting (OpenResty) and rapid prototyping</li>
@@ -1582,8 +1594,11 @@
 </ul>
 <h3 id="unitree-g1-robotics">Unitree G1 Robotics</h3>
 <ul>
-<li>Developed Python-based motion control and scripting for the Unitree G1 platform</li>
-<li>Integrated robot control pipelines with ML-driven inference backends</li>
+<li>Built a full robotics orchestration platform (editor + simulation + real hardware deploy) for the Unitree G1 humanoid robot, structured as a Unity-style authoring environment with a scene graph, component inspector, and one-click Play/Deploy workflow</li>
+<li>Implemented a real-time perception pipeline: RT-DETR person detection at 10 Hz with ByteTrack multi-object tracking, bearing and distance estimation, and live bounding box overlay in the editor viewport</li>
+<li>Wrapped a pretrained ONNX locomotion policy executing at 50 Hz; integrated a FollowPerson behavior tree (py-trees) with P-controller for bearing and distance, lost-target recovery, and safety gate with geofence and e-stop</li>
+<li>Built a HAL abstraction layer over CycloneDDS enabling the same component graph to run in MuJoCo simulation and on the real G1 hardware with a configuration swap; implemented containerised one-click deploy with staged velocity ramp and SSH-based e-stop</li>
+<li>All sessions (sim and real) recorded to MCAP and visualised in Rerun with synchronized camera, detection, robot state, and BT tick streams; integrated XR teleoperation via Meta Quest 3</li>
 </ul>
 <h2 id="education">Education</h2>
 <p><strong>PhD in Artificial Intelligence</strong> — Kingston University | Awarded 2024</p>
@@ -1659,10 +1674,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate":null,"base":".","features":[],"search":"./assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":".","features":[],"search":"./assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
     
     
-      <script src="./assets/javascripts/bundle.6e5f0216.min.js"></script>
+      <script src="./assets/javascripts/bundle.d7f30b55.min.js"></script>
       
     
   </body>
